@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speisekarte | Sakura Sushi</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .menu-hero {
+            padding: 12rem 0 8rem;
+            text-align: center;
+            background: linear-gradient(rgba(17, 17, 17, 0.85), rgba(17, 17, 17, 0.95)), url('assets/images/sushi_dragon_roll_closeup_1772543114074.png') no-repeat center center/cover;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .menu-hero h2 {
+            font-size: 5rem;
+            color: var(--cream);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .menu-category-section {
+            padding: 6rem 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .menu-category-title {
+            color: var(--bordeaux-red);
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .menu-category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background-color: var(--gold);
+        }
+
+        /* Creative Masonry-like Grid */
+        .creative-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+        }
+
+        .creative-card {
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .creative-img-wrapper {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .creative-img-wrapper img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .creative-card:hover .creative-img-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .creative-info {
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .creative-info-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.8rem;
+        }
+
+        .creative-info h3 {
+            font-size: 1.5rem;
+            color: var(--cream);
+            margin: 0 0 0.5rem 0;
+        }
+
+        .creative-price {
+            font-size: 1.3rem;
+            color: var(--gold);
+            font-family: var(--font-heading);
+            font-weight: 600;
+        }
+
+        .creative-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-order-glow {
+            display: inline-block;
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--gold);
+            padding: 0.6rem 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin: 0 auto;
+        }
+
+        .btn-order-glow:hover {
+            background: var(--gold);
+            color: var(--deep-black);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar scrolled">
+        <a href="index.html" class="nav-logo">
+            <h1>Sakura<span>.</span></h1>
+        </a>
+        <div class="hamburger"><span></span><span></span><span></span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Startseite</a></li>
+            <li><a href="menu.html" class="active">Speisekarte</a></li>
+            <li><a href="about.html">Über uns</a></li>
+            <li><a href="ordering.html">Online Bestellen</a></li>
+            <li><a href="contact.html">Kontakt & Impressum</a></li>
+        </ul>
+    </nav>
+
+    <header class="menu-hero">
+        <div class="container">
+            <h2>Die kulinarische Kunst</h2>
+            <p style="color: var(--gold); font-size: 1.2rem; font-style: italic; font-family: var(--font-heading);">Eine
+                Symphonie exquisiter Aromen und handwerklicher Präzision.</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Signature Rolls -->
+        <section class="menu-category-section">
+            <h3 class="menu-category-title">Spezielle Rollen</h3>
+            <div class="creative-grid">
+                <div class="creative-card">
+                    <div class="creative-img-wrapper">
+                        <img src="assets/images/sushi_dragon_roll_closeup_1772543114074.png" alt="Dragon Roll">
+                    </div>
+                    <div class="creative-info">
+                        <div class="creative-info-header">
+                            <h3>Dragon Roll</h3>
+                            <span class="creative-price">€21</span>
+                        </div>
+                        <p class="creative-desc">Aal, Gurke und Surimi harmonisch gerollt, belegt mit in feine Scheiben
+                            geschnittener Avocado und beträufelt mit unserer hausgemachten Unagi-Sauce.</p>
+                        <button class="btn-order-glow">In den Warenkorb</button>
+                    </div>
+                </div>
+                <div class="creative-card">
+                    <div class="creative-img-wrapper">
+                        <img src="assets/images/sushi_maki_1772541910733.png" alt="Volcano Maki">
+                    </div>
+                    <div class="creative-info">
+                        <div class="creative-info-header">
+                            <h3>Volcano Maki</h3>
+                            <span class="creative-price">€19</span>
+                        </div>
+                        <p class="creative-desc">Scharf marinierter Thunfisch und Gurke, umhüllt von knusprigen
+                            Tempura-Flocken und gekrönt mit einer feurigen Mayo-Glasur.</p>
+                        <button class="btn-order-glow">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Combo Platters -->
+        <section class="menu-category-section">
+            <h3 class="menu-category-title">Kombi-Platten & Boote</h3>
+            <div class="creative-grid" style="display: flex; justify-content: center;">
+                <div class="creative-card" style="width: 100%; max-width: 500px;">
+                    <div class="creative-img-wrapper">
+                        <img src="assets/images/sushi_combo_platter_1772543923289.png" alt="Sakura Imperial Boot">
+                    </div>
+                    <div class="creative-info">
+                        <div class="creative-info-header">
+                            <h3>Sakura Imperial Boot (Für 2)</h3>
+                            <span class="creative-price">€85</span>
+                        </div>
+                        <p class="creative-desc">Eine luxuriöse Auswahl unseres feinsten Sashimi, Premium-Nigiri und
+                            aufwendiger speziellen Rollen, präsentiert auf einem traditionellen Holzboot.</p>
+                        <button class="btn-order-glow">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nigiri & Sashimi -->
+        <section class="menu-category-section">
+            <h3 class="menu-category-title">Nigiri & Sashimi Meisterschaft</h3>
+            <div class="creative-grid">
+                <div class="creative-card">
+                    <div class="creative-img-wrapper">
+                        <img src="assets/images/sushi_closeup_plating_1772543075112.png" alt="Premium Nigiri">
+                    </div>
+                    <div class="creative-info">
+                        <div class="creative-info-header">
+                            <h3>Blauflossen-Thunfisch Nigiri</h3>
+                            <span class="creative-price">€18</span>
+                        </div>
+                        <p class="creative-desc">Dicke, glänzende Scheiben von Premium-Blauflossen-Thunfisch, sanft auf
+                            perfekt gewürzten, warmen Sushireis gelegt.</p>
+                        <button class="btn-order-glow">In den Warenkorb</button>
+                    </div>
+                </div>
+                <div class="creative-card">
+                    <div class="creative-img-wrapper">
+                        <img src="assets/images/sushi_sashimi_1772541924274.png" alt="Sashimi Platter">
+                    </div>
+                    <div class="creative-info">
+                        <div class="creative-info-header">
+                            <h3>Ozean-Sashimi</h3>
+                            <span class="creative-price">€38</span>
+                        </div>
+                        <p class="creative-desc">Die absolut frischesten Stücke des Tages: Lachs, Gelbschwanzmakrele und
+                            Blauflossen-Thunfisch, elegant auf Eis arrangiert.</p>
+                        <button class="btn-order-glow">In den Warenkorb</button>
+                    </div>
+                </div>
+                <div class="creative-card">
+                    <div class="creative-img-wrapper">
+                        <img src="assets/images/sushi_nigiri_1772541891904.png" alt="Mixed Nigiri">
+                    </div>
+                    <div class="creative-info">
+                        <div class="creative-info-header">
+                            <h3>Klassisches Nigiri-Set</h3>
+                            <span class="creative-price">€24</span>
+                        </div>
+                        <p class="creative-desc">Eine feine Auswahl von 6 traditionellen Nigiri-Stücken, darunter Lachs,
+                            Thunfisch, Garnele und Aal.</p>
+                        <button class="btn-order-glow">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Starters & Extras -->
+        <section class="menu-category-section">
+            <h3 class="menu-category-title">Vorspeisen & Extras</h3>
+            <div class="creative-grid">
+                <div class="creative-card">
+                    <div class="creative-img-wrapper">
+                        <img src="assets/images/fresh_ingredients_1772543099300.png" alt="Frische Zutaten">
+                    </div>
+                    <div class="creative-info">
+                        <div class="creative-info-header">
+                            <h3>Frisch geriebener Wasabi</h3>
+                            <span class="creative-price">€5</span>
+                        </div>
+                        <p class="creative-desc">Authentische, frisch geriebene japanische Wasabi-Wurzel für das wahre
+                            Kennererlebnis.</p>
+                        <button class="btn-order-glow">In den Warenkorb</button>
+                    </div>
+                </div>
+                <div class="creative-card">
+                    <div class="creative-img-wrapper">
+                        <img src="assets/images/edamame_sea_salt_1772613889838.png" alt="Edamame Meersalz">
+                    </div>
+                    <div class="creative-info">
+                        <div class="creative-info-header">
+                            <h3>Edamame Meersalz</h3>
+                            <span class="creative-price">€6</span>
+                        </div>
+                        <p class="creative-desc">Gedämpfte junge Sojabohnen, bestreut mit grobem Meersalz.</p>
+                        <button class="btn-order-glow">In den Warenkorb</button>
+                    </div>
+                </div>
+                <div class="creative-card">
+                    <div class="creative-img-wrapper">
+                        <img src="assets/images/miso_soup_1772613904856.png" alt="Miso-Suppe">
+                    </div>
+                    <div class="creative-info">
+                        <div class="creative-info-header">
+                            <h3>Miso-Suppe</h3>
+                            <span class="creative-price">€4</span>
+                        </div>
+                        <p class="creative-desc">Traditionelle Dashi-Brühe mit Seidentofu, Wakame-Algen und
+                            Frühlingszwiebeln.</p>
+                        <button class="btn-order-glow">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Desserts -->
+        <section class="menu-category-section">
+            <h3 class="menu-category-title">Desserts</h3>
+            <div class="creative-grid" style="display: flex; justify-content: center;">
+                <div class="creative-card" style="width: 100%; max-width: 500px;">
+                    <div class="creative-img-wrapper">
+                        <img src="assets/images/mochi_dessert_1772543908101.png" alt="Mochi Dessert">
+                    </div>
+                    <div class="creative-info">
+                        <div class="creative-info-header">
+                            <h3>Mochi-Auswahl</h3>
+                            <span class="creative-price">€9</span>
+                        </div>
+                        <p class="creative-desc">Zarte japanische Mochi, gefüllt mit erstklassigem Matcha- und
+                            Mango-Eis, elegant angerichtet.</p>
+                        <button class="btn-order-glow">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Beverages -->
+        <section class="menu-category-section" style="border-bottom: none; margin-bottom: 4rem;">
+            <h3 class="menu-category-title">Getränke & Spirituosen</h3>
+            <div class="creative-grid">
+                <div class="creative-card">
+                    <div class="creative-img-wrapper">
+                        <img src="assets/images/sake_bottle_1772543894019.png" alt="Premium Sake">
+                    </div>
+                    <div class="creative-info">
+                        <div class="creative-info-header">
+                            <h3>Premium Junmai Daiginjo Sake</h3>
+                            <span class="creative-price">€45</span>
+                        </div>
+                        <p class="creative-desc">Ein hochraffinierter, weicher Sake, gekühlt serviert in traditionellen
+                            Keramikbechern. (Flasche)</p>
+                        <button class="btn-order-glow">In den Warenkorb</button>
+                    </div>
+                </div>
+                <div class="creative-card">
+                    <div class="creative-img-wrapper">
+                        <img src="assets/images/japanese_green_tea_1772543876253.png" alt="Matcha Green Tea">
+                    </div>
+                    <div class="creative-info">
+                        <div class="creative-info-header">
+                            <h3>Zeremonieller Matcha-Grüntee</h3>
+                            <span class="creative-price">€6</span>
+                        </div>
+                        <p class="creative-desc">Dampfend heißer, tiefaromatischer traditioneller japanischer Grüntee.
+                        </p>
+                        <button class="btn-order-glow">In den Warenkorb</button>
+                    </div>
+                </div>
+                <div class="creative-card">
+                    <div class="creative-img-wrapper">
+                        <img src="assets/images/sakura_cocktail_1772613920112.png" alt="Sakura Spezial-Cocktail">
+                    </div>
+                    <div class="creative-info">
+                        <div class="creative-info-header">
+                            <h3>Sakura Spezial-Cocktail</h3>
+                            <span class="creative-price">€14</span>
+                        </div>
+                        <p class="creative-desc">Ein feiner Cocktail auf Gin-Basis, verfeinert mit Kirschblüten und
+                            Yuzu.</p>
+                        <button class="btn-order-glow">In den Warenkorb</button>
+                    </div>
+                </div>
+                <div class="creative-card">
+                    <div class="creative-img-wrapper">
+                        <img src="assets/images/japanese_soft_drinks_1772613935223.png" alt="Japanische Softdrinks">
+                    </div>
+                    <div class="creative-info">
+                        <div class="creative-info-header">
+                            <h3>Japanische Softdrinks</h3>
+                            <span class="creative-price">€5</span>
+                        </div>
+                        <p class="creative-desc">Auswahl an Ramune, Calpis und hochwertigem Mineralwasser.</p>
+                        <button class="btn-order-glow">In den Warenkorb</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Complete Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Sakura.</h4>
+                    <p>Handgemachtes Sushi. Inspiriert von Japan.</p>
+                    <p>Erleben Sie pure Eleganz und authentische kulinarische Kunst.</p>
+                    <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+                        <a href="#" style="color: var(--gold); font-size: 1.2rem;">IG</a>
+                        <a href="#" style="color: var(--gold); font-size: 1.2rem;">FB</a>
+                        <a href="#" style="color: var(--gold); font-size: 1.2rem;">TW</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Entdecken</h4>
+                    <ul>
+                        <li><a href="index.html">Startseite</a></li>
+                        <li><a href="menu.html">Speisekarte</a></li>
+                        <li><a href="about.html">Über uns</a></li>
+                        <li><a href="ordering.html">Online Bestellen</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontakt</h4>
+                    <p>Robert-Bosch-Breite 10,<br>37079 Göttingen, Deutschland</p>
+                    <p>+49 155 66284478</p>
+                    <p><a href="mailto:info@wentech-agentur.de">service@sakura-sushi-goettingen.de</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Sakura Sushi. Alle Rechte vorbehalten. | <a href="contact.html">Impressum</a> | <a
+                        href="contact.html">Datenschutz</a> | <a href="contact.html">AGB</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Über uns | Sakura Sushi</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .about-hero {
+            padding: 12rem 0 6rem;
+            text-align: center;
+        }
+
+        .about-hero h2 {
+            font-size: 4.5rem;
+            color: var(--cream);
+            margin-bottom: 1rem;
+        }
+
+        .about-hero p {
+            color: var(--gold);
+            font-size: 1.3rem;
+            font-family: var(--font-heading);
+            font-style: italic;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            margin-bottom: 8rem;
+        }
+
+        .about-text h2 {
+            font-size: 3rem;
+            color: var(--bordeaux-red);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-img {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .philosophy-banner {
+            background-color: var(--dark-gray);
+            padding: 6rem 0;
+            margin-bottom: 8rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .philosophy-banner h3 {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        .philosophy-banner p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        @media (max-width: 900px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                margin-bottom: 4rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar scrolled">
+        <a href="index.html" class="nav-logo">
+            <h1>Sakura<span>.</span></h1>
+        </a>
+        <div class="hamburger"><span></span><span></span><span></span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Startseite</a></li>
+            <li><a href="menu.html">Speisekarte</a></li>
+            <li><a href="about.html" class="active">Über uns</a></li>
+            <li><a href="ordering.html">Online Bestellen</a></li>
+            <li><a href="contact.html">Kontakt & Impressum</a></li>
+        </ul>
+    </nav>
+
+    <header class="about-hero">
+        <div class="container">
+            <h2>Unsere Geschichte</h2>
+            <p>Eine Reise von Tokio nach Göttingen.</p>
+        </div>
+    </header>
+
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <!-- Story Part 1 -->
+            <div class="about-grid">
+                <div class="about-img">
+                    <img src="assets/images/chef_portrait_1772541942251.png" alt="Head Chef">
+                </div>
+                <div class="about-text">
+                    <h2>Die Handschrift des Meisters</h2>
+                    <p>Die Reise unseres Chefkochs begann auf den belebten Fischmärkten von Tokio, wo er über ein
+                        Jahrzehnt damit verbrachte, die empfindliche Balance der Aromen, die exakte Temperatur des Reis
+                        und den präzisen Schnitt des Fisches zu meistern.</p>
+                    <p>Bei Sakura Sushi glauben wir, dass Sushi nicht nur Essen ist; es ist eine Kunstform. Jedes
+                        Gericht wird mit höchstem Respekt vor der japanischen Tradition und außergewöhnlicher Präzision
+                        zubereitet. Wir widmen uns vollkommen diesem Handwerk und sorgen dafür, dass jedes Reiskorn und
+                        jede Scheibe Sashimi ein kulinarisches Erlebnis garantiert, das direkt die Seele anspricht.</p>
+                </div>
+            </div>
+
+            <!-- Philosophy Banner -->
+        </div>
+    </section>
+
+    <div class="philosophy-banner">
+        <div class="container">
+            <h3>Unsere Philosophie & Hingabe</h3>
+            <p>"Wir beziehen nur die feinsten, reinsten Zutaten. Echte japanische Küche beruht auf der Integrität der
+                Rohmaterialien, die mit tiefem Respekt und unnachgiebiger Leidenschaft behandelt werden. Die Harmonie
+                auf dem Teller spiegelt die Harmonie in unserem Geist wider. Wenn Sie bei uns speisen, erleben Sie
+                Jahrzehnte verfeinerter Technik und eine absolute Weigerung, Kompromisse bei der Qualität einzugehen."
+            </p>
+        </div>
+    </div>
+
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <!-- Story Part 2 (Team) -->
+            <div class="about-grid" style="direction: rtl;">
+                <div class="about-img" style="direction: ltr;">
+                    <img src="assets/images/team_staff_photo_1772543063173.png" alt="Sakura Sushi Team">
+                </div>
+                <div class="about-text" style="direction: ltr;">
+                    <h2>Unser engagiertes Team</h2>
+                    <p>Unsere Stärke liegt in unseren Mitarbeitern. Von unseren akribisch ausgebildeten Sushi-Köchen bis
+                        zu unserem warmherzigen und professionellen Servicepersonal teilt jedes Mitglied der
+                        Sakura-Familie eine gemeinsame Vision: ein unvergessliches, authentisches japanisches
+                        Speiseerlebnis zu bieten.</p>
+                    <p>Wir sind stolz auf die aufrichtige Herzlichkeit und den aufmerksamen Service, die die japanische
+                        Omotenashi (Gastfreundschaft) prägen. Vom Moment Ihres Eintretens oder Ihrer Bestellung an
+                        werden Sie von unserem Streben nach Exzellenz umfangen.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Complete Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Sakura.</h4>
+                    <p>Handgemachtes Sushi. Inspiriert von Japan.</p>
+                    <p>Erleben Sie pure Eleganz und authentische kulinarische Kunst.</p>
+                    <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+                        <a href="#" style="color: var(--gold); font-size: 1.2rem;">IG</a>
+                        <a href="#" style="color: var(--gold); font-size: 1.2rem;">FB</a>
+                        <a href="#" style="color: var(--gold); font-size: 1.2rem;">TW</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Entdecken</h4>
+                    <ul>
+                        <li><a href="index.html">Startseite</a></li>
+                        <li><a href="menu.html">Speisekarte</a></li>
+                        <li><a href="about.html">Über uns</a></li>
+                        <li><a href="ordering.html">Online Bestellen</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontakt</h4>
+                    <p>Robert-Bosch-Breite 10,<br>37079 Göttingen, Deutschland</p>
+                    <p>+49 155 66284478</p>
+                    <p><a href="mailto:info@wentech-agentur.de">service@sakura-sushi-goettingen.de</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Sakura Sushi. Alle Rechte vorbehalten. | <a href="contact.html">Impressum</a> | <a
+                        href="contact.html">Datenschutz</a> | <a href="contact.html">AGB</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>

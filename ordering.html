@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Bestellen | Sakura Sushi</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .page-header {
+            padding: 8rem 0 3rem;
+            text-align: center;
+        }
+
+        .page-header h2 {
+            font-size: 3rem;
+            color: var(--cream);
+        }
+
+        .order-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            max-width: 900px;
+            margin: 0 auto;
+            gap: 4rem;
+            padding-bottom: 6rem;
+        }
+
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .order-item {
+            background: var(--dark-gray);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .order-item-main {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            justify-content: space-between;
+        }
+
+        .order-item-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 1.5rem;
+        }
+
+        .order-item-info h4 {
+            font-size: 1.4rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .order-item-info p {
+            color: var(--gold);
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+        }
+
+        /* Customization UI */
+        .order-options {
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .option-group {
+            margin-bottom: 1rem;
+        }
+
+        .option-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .form-select,
+        .form-input-text {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--deep-black);
+            color: var(--cream);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Sidebar Cart as Drawer */
+        .cart-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(3px);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .cart-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-sidebar {
+            background: var(--deep-black);
+            padding: 2.5rem;
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 450px;
+            max-width: 100vw;
+            height: 100vh;
+            border-left: 1px solid rgba(212, 175, 55, 0.2);
+            z-index: 1000;
+            transition: right 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.active {
+            right: 0;
+        }
+
+        .cart-close-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: transparent;
+            color: var(--text-light);
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .cart-close-btn:hover {
+            color: var(--gold);
+        }
+
+        .toggle-group {
+            display: flex;
+            margin-bottom: 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .toggle-btn {
+            flex: 1;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .toggle-btn.active {
+            background: var(--bordeaux-red);
+            color: var(--cream);
+            font-weight: 600;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--gold);
+            font-family: var(--font-heading);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .payment-methods div {
+            background: var(--deep-black);
+            padding: 0.8rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-methods div:hover {
+            border-color: rgba(212, 175, 55, 0.5);
+            color: var(--cream);
+        }
+
+        .payment-methods div.active {
+            border-color: var(--gold);
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .cc-form {
+            display: none;
+            margin-top: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .cc-form.active {
+            display: block;
+            animation: heroFadeInUp 0.3s ease forwards;
+        }
+
+        .cc-input {
+            width: 100%;
+            background: var(--deep-black);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--cream);
+            padding: 0.8rem;
+            border-radius: 4px;
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .cc-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Navbar additions */
+        .nav-icons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--bordeaux-red);
+            color: var(--cream);
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 900px) {
+            .order-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Full Header Navigation with Cart Icon -->
+    <nav class="navbar scrolled">
+        <a href="index.html" class="nav-logo">
+            <h1>Sakura<span>.</span></h1>
+        </a>
+
+        <ul class="nav-links" style="margin-left: auto; margin-right: 2rem;">
+            <li><a href="index.html">Startseite</a></li>
+            <li><a href="menu.html">Speisekarte</a></li>
+            <li><a href="about.html">Über uns</a></li>
+            <li><a href="ordering.html" class="active">Online Bestellen</a></li>
+            <li><a href="contact.html">Kontakt & Impressum</a></li>
+        </ul>
+
+        <div class="nav-icons" style="padding-right: 2rem; display: flex;">
+            <div class="cart-icon" id="cartIcon" style="cursor: pointer;">
+                🛒
+                <span class="cart-badge">2</span>
+            </div>
+        </div>
+
+        <div class="hamburger"><span></span><span></span><span></span></div>
+    </nav>
+
+    <header class="hero"
+        style="position: relative; min-height: 50vh; display: flex; align-items: center; justify-content: center; text-align: center; background: url('assets/images/fresh_ingredients_1772543099300.png') center/cover no-repeat;">
+        <div style="position: absolute; inset: 0; background: rgba(17, 17, 17, 0.7); z-index: 1;"></div>
+        <div class="container" style="position: relative; z-index: 2; padding: 4rem 2rem;">
+            <h2
+                style="font-size: 4rem; color: var(--cream); font-family: var(--font-heading); margin-bottom: 1rem; text-shadow: 0 4px 15px rgba(0,0,0,0.8);">
+                Online Bestellen</h2>
+            <p
+                style="color: var(--gold); font-size: 1.3rem; margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
+                Ihre Lieblingsgerichte, frisch und authentisch zubereitet. Wählen Sie zwischen Lieferung oder Abholung
+                und genießen Sie Sakura Sushi bequem zu Hause.
+            </p>
+            <a href="#menu-items" class="btn btn-primary"
+                style="padding: 1rem 3rem; font-size: 1.2rem; border-radius: 30px; box-shadow: 0 10px 20px rgba(139,0,0,0.4);">Bestellung
+                starten</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="order-layout">
+            <!-- Items Area -->
+            <div class="order-items" id="menu-items">
+                <div class="menu-list">
+
+                    <!-- Item 1 with customization -->
+                    <div class="order-item">
+                        <div class="order-item-main">
+                            <div style="display:flex; align-items:center;">
+                                <img src="assets/images/sushi_dragon_roll_closeup_1772543114074.png"
+                                    class="order-item-img" alt="Dragon Roll">
+                                <div class="order-item-info">
+                                    <h4>Dragon Roll</h4>
+                                    <p>€21</p>
+                                </div>
+                            </div>
+                            <div style="text-align: center;">
+                                <button class="btn btn-outline" style="width: 80%; margin-top: 1.5rem;">In den
+                                    Warenkorb</button>
+                            </div>
+                        </div>
+                        <div class="order-options">
+                            <div class="option-group">
+                                <label>Portionsgröße</label>
+                                <select class="form-select">
+                                    <option>Standard (8 Stk.)</option>
+                                    <option>Groß (12 Stk.) + €9</option>
+                                </select>
+                            </div>
+                            <div class="option-group">
+                                <label>Zusätzliche Zutaten</label>
+                                <select class="form-select">
+                                    <option>Keine</option>
+                                    <option>Extra Aal + €4</option>
+                                    <option>Extra Avocado + €2</option>
+                                </select>
+                            </div>
+                            <div class="option-group">
+                                <label>Saucenauswahl & Schärfegrad</label>
+                                <div style="display:flex; gap:1rem;">
+                                    <select class="form-select">
+                                        <option>Unagi-Sauce (Standard)</option>
+                                        <option>Spicy Mayo</option>
+                                        <option>Ponzu-Sauce</option>
+                                    </select>
+                                    <select class="form-select">
+                                        <option>Mild</option>
+                                        <option>Mittel</option>
+                                        <option>Scharf</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="option-group">
+                                <label>Besondere Anweisungen</label>
+                                <input type="text" class="form-input-text" placeholder="z.B. kein Sesam, extra Ingwer">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cart Sidebar -->
+            <div class="cart-overlay" id="cartOverlay"></div>
+            <div class="cart-sidebar" id="cartSidebar">
+                <button class="cart-close-btn" id="cartCloseBtn">✕</button>
+                <h3 style="margin-bottom: 1.5rem; font-size: 1.8rem; padding-top: 1rem;">Ihre Bestellung</h3>
+                <div class="toggle-group">
+                    <div class="toggle-btn active">Lieferung</div>
+                    <div class="toggle-btn">Abholung</div>
+                </div>
+
+                <p
+                    style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1rem;">
+                    Geschätzte Dauer: <strong style="color:var(--cream);">45 Min.</strong></p>
+
+                <div class="cart-items">
+                    <div class="cart-item">
+                        <span>1x Dragon Roll (Standard, Mild)</span>
+                        <span>€21.00</span>
+                    </div>
+                    <div class="cart-item">
+                        <span>1x Bluefin Nigiri</span>
+                        <span>€18.00</span>
+                    </div>
+                    <div class="cart-item" style="color: var(--cream);">
+                        <span>Liefergebühr</span>
+                        <span>€2.50</span>
+                    </div>
+                </div>
+
+                <div class="option-group" style="margin-top: 2rem;">
+                    <input type="text" class="form-input-text" placeholder="Rabattcode / Treuekarte">
+                </div>
+
+                <div class="cart-total">
+                    <span>Gesamt</span>
+                    <span>€41.50</span>
+                </div>
+
+                <div class="payment-methods">
+                    <div class="pay-btn" data-method="paypal">PayPal</div>
+                    <div class="pay-btn active" data-method="cc">Kreditkarte</div>
+                    <div class="pay-btn" data-method="apple">Apple Pay</div>
+                </div>
+
+                <!-- Secure CC Form -->
+                <div class="cc-form active" id="ccForm">
+                    <input type="text" class="cc-input" placeholder="Kartennummer" maxlength="19">
+                    <div class="cc-row">
+                        <input type="text" class="cc-input" placeholder="MM/JJ" maxlength="5">
+                        <input type="password" class="cc-input" placeholder="CVC" maxlength="3">
+                    </div>
+                    <input type="text" class="cc-input" style="margin-bottom: 0;" placeholder="Name auf Karte">
+                </div>
+
+                <button class="btn btn-primary" id="checkoutBtn"
+                    style="width: 100%; text-align: center; font-size: 1.2rem; padding: 1.2rem; margin-top: 2rem;">Zur
+                    Kasse</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Complete Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Sakura.</h4>
+                    <p>Handgemachtes Sushi. Inspiriert von Japan.</p>
+                    <p>Erleben Sie pure Eleganz und authentische kulinarische Kunst.</p>
+                    <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+                        <a href="#" style="color: var(--gold); font-size: 1.2rem;">IG</a>
+                        <a href="#" style="color: var(--gold); font-size: 1.2rem;">FB</a>
+                        <a href="#" style="color: var(--gold); font-size: 1.2rem;">TW</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Entdecken</h4>
+                    <ul>
+                        <li><a href="index.html">Startseite</a></li>
+                        <li><a href="menu.html">Speisekarte</a></li>
+                        <li><a href="about.html">Über uns</a></li>
+                        <li><a href="ordering.html">Online Bestellen</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontakt</h4>
+                    <p>Robert-Bosch-Breite 10,<br>37079 Göttingen, Deutschland</p>
+                    <p>+49 155 66284478</p>
+                    <p><a href="mailto:info@wentech-agentur.de">service@sakura-sushi-goettingen.de</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Sakura Sushi. Alle Rechte vorbehalten. | <a href="contact.html">Impressum</a> | <a
+                        href="contact.html">Datenschutz</a> | <a href="contact.html">AGB</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.querySelectorAll('.toggle-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Cart Toggle Logic
+        const cartIconBtn = document.getElementById('cartIcon');
+        const cartSidebarEl = document.getElementById('cartSidebar');
+        const cartOverlayEl = document.getElementById('cartOverlay');
+        const cartCloseBtnEl = document.getElementById('cartCloseBtn');
+
+        function toggleCart() {
+            if (cartSidebarEl && cartOverlayEl) {
+                cartSidebarEl.classList.toggle('active');
+                cartOverlayEl.classList.toggle('active');
+                document.body.style.overflow = cartSidebarEl.classList.contains('active') ? 'hidden' : '';
+            }
+        }
+
+        if (cartIconBtn) cartIconBtn.addEventListener('click', toggleCart);
+        if (cartOverlayEl) cartOverlayEl.addEventListener('click', toggleCart);
+        if (cartCloseBtnEl) cartCloseBtnEl.addEventListener('click', toggleCart);
+
+        // Payment Selection Logic
+        const payBtns = document.querySelectorAll('.pay-btn');
+        const ccForm = document.getElementById('ccForm');
+        let selectedPayment = 'cc';
+
+        payBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                payBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                selectedPayment = this.getAttribute('data-method');
+
+                if (selectedPayment === 'cc') {
+                    ccForm.classList.add('active');
+                } else {
+                    ccForm.classList.remove('active');
+                }
+            });
+        });
+
+        // Checkout Button Logic
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        checkoutBtn.addEventListener('click', function () {
+            if (selectedPayment === 'paypal') {
+                alert("Weiterleitung zu PayPal. Sitzung wird gesichert...");
+                window.open("https://www.paypal.com/checkoutnow", "_blank");
+            } else if (selectedPayment === 'apple') {
+                alert("Apple Pay Fenster wird geöffnet...");
+                if (window.PaymentRequest) {
+                    try {
+                        const supportedInstruments = [{ supportedMethods: 'https://apple.com/apple-pay' }];
+                        const details = { total: { label: 'Gesamt', amount: { currency: 'EUR', value: '41.50' } } };
+                        new PaymentRequest(supportedInstruments, details).show().catch(e => {
+                            alert("Apple Pay wurde vom Nutzer abgebrochen oder ist in dieser Umgebung nicht vollständig konfiguriert.");
+                        });
+                    } catch (e) {
+                        alert("Apple Pay nicht konfiguriert - Starte Fallback-Schnittstelle...");
+                    }
+                }
+            } else if (selectedPayment === 'cc') {
+                const inputs = ccForm.querySelectorAll('.cc-input');
+                let valid = true;
+                inputs.forEach(i => { if (!i.value) valid = false; });
+
+                if (!valid) {
+                    alert("Bitte füllen Sie alle Kreditkartenfelder aus.");
+                } else {
+                    alert("Zahlung per Kreditkarte erfolgreich verarbeitet! Vielen Dank für Ihre Bestellung.");
+                    toggleCart();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

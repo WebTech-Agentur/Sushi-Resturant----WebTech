@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt & Impressum | Sakura Sushi</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .contact-section {
+            padding: 8rem 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h2 {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+        }
+
+        .info-block {
+            margin-bottom: 2rem;
+        }
+
+        .info-block h3 {
+            color: var(--bordeaux-red);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .info-block p,
+        .info-block a {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .info-block a:hover {
+            color: var(--cream);
+        }
+
+        .legal-tabs {
+            background: var(--dark-gray);
+            padding: 3rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .legal-tabs h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 0.5rem;
+        }
+
+        .legal-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 2rem;
+            height: 150px;
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+
+        .legal-text::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .legal-text::-webkit-scrollbar-thumb {
+            background: var(--bordeaux-red);
+        }
+
+        @media (max-width: 900px) {
+            .contact-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar scrolled">
+        <a href="index.html" class="nav-logo">
+            <h1>Sakura<span>.</span></h1>
+        </a>
+        <div class="hamburger"><span></span><span></span><span></span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Startseite</a></li>
+            <li><a href="menu.html">Speisekarte</a></li>
+            <li><a href="about.html">Über uns</a></li>
+            <li><a href="ordering.html">Online Bestellen</a></li>
+            <li><a href="contact.html" class="active">Kontakt & Impressum</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="contact-section">
+
+            <div class="contact-info">
+                <h2>Kontakt aufnehmen</h2>
+
+                <div class="info-block">
+                    <h3>Adresse</h3>
+                    <p>Robert-Bosch-Breite 10,<br>37079 Göttingen, Deutschland</p>
+                </div>
+
+                <div class="info-block">
+                    <h3>Telefon</h3>
+                    <p><a href="tel:+4915566284478">+49 155 66284478</a></p>
+                </div>
+
+                <div class="info-block">
+                    <h3>E-Mail</h3>
+                    <p>Für allgemeine Anfragen erreichen Sie uns unter <a
+                            href="mailto:info@webtech-agentur.de">service@sakura-sushi-goettingen.de</a>.</p>
+                    <p style="font-size: 0.9rem; margin-top: 1rem;">Bitte beachten Sie, dass sich beim Klicken auf den
+                        E-Mail-Link zum Senden einer Nachricht automatisch Ihr E-Mail-Programm öffnet und eine neue
+                        Nachricht an info@webtech-agentur.de adressiert wird.</p>
+                    <p style="font-size: 0.9rem; margin-top: 0.5rem;">Wir freuen uns darauf, von Ihnen zu hören.</p>
+                </div>
+
+                <div class="info-block" style="margin-top: 3rem;">
+                    <h3>Öffnungszeiten</h3>
+                    <p>Dienstag - Sonntag: 17:00 - 23:00<br>Montag: Geschlossen</p>
+                </div>
+            </div>
+
+            <div class="legal-tabs">
+                <h3>Impressum</h3>
+                <div class="legal-text">
+                    <p>Sakura Sushi GmbH<br>
+                        Robert-Bosch-Breite 10<br>
+                        37079 Göttingen, Deutschland</p>
+                    <p><br>Handelsregister: HRB XXXXX<br>
+                        Registergericht: Amtsgericht Göttingen</p>
+                    <p><br><strong>Vertreten durch:</strong><br>Name des Geschäftsführers</p>
+                </div>
+
+                <h3>Datenschutz</h3>
+                <div class="legal-text" style="height: 100px;">
+                    <p>Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Wir behandeln Ihre personenbezogenen
+                        Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser
+                        Datenschutzerklärung.</p>
+                </div>
+
+                <h3>AGB</h3>
+                <div class="legal-text" style="height: 100px;">
+                    <p>Mit der Aufgabe einer Bestellung erklären Sie sich mit unseren allgemeinen Geschäftsbedingungen
+                        zu Lieferzeiten, Zahlung und Stornierungsbedingungen einverstanden.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Complete Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Sakura.</h4>
+                    <p>Handgemachtes Sushi. Inspiriert von Japan.</p>
+                    <p>Erleben Sie pure Eleganz und authentische kulinarische Kunst.</p>
+                    <div style="margin-top: 1rem; display: flex; gap: 1rem;">
+                        <a href="#" style="color: var(--gold); font-size: 1.2rem;">IG</a>
+                        <a href="#" style="color: var(--gold); font-size: 1.2rem;">FB</a>
+                        <a href="#" style="color: var(--gold); font-size: 1.2rem;">TW</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Entdecken</h4>
+                    <ul>
+                        <li><a href="index.html">Startseite</a></li>
+                        <li><a href="menu.html">Speisekarte</a></li>
+                        <li><a href="about.html">Über uns</a></li>
+                        <li><a href="ordering.html">Online Bestellen</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontakt</h4>
+                    <p>Robert-Bosch-Breite 10,<br>37079 Göttingen, Deutschland</p>
+                    <p>+49 155 66284478</p>
+                    <p><a href="mailto:info@wentech-agentur.de">service@sakura-sushi-goettingen.de</a></p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Sakura Sushi. Alle Rechte vorbehalten. | <a href="contact.html">Impressum</a> | <a
+                        href="contact.html">Datenschutz</a> | <a href="contact.html">AGB</a></p>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
