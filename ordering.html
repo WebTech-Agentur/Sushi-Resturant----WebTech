@@ -4,471 +4,963 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Bestellen | Sakura Sushi</title>
+    <title>Online Bestellung | Sakura Sushi</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .page-header {
-            padding: 8rem 0 3rem;
-            text-align: center;
-        }
-
-        .page-header h2 {
-            font-size: 3rem;
-            color: var(--cream);
-        }
-
-        .order-layout {
-            display: grid;
-            grid-template-columns: 1fr;
-            max-width: 900px;
-            margin: 0 auto;
-            gap: 4rem;
-            padding-bottom: 6rem;
-        }
-
-        .menu-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .order-item {
-            background: var(--dark-gray);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .order-item-main {
+        /* CREATIVE BESTELL-BOX */
+        .bestell-box {
             display: flex;
             align-items: center;
-            padding: 1.5rem;
+            justify-content: center;
+            gap: 8px;
+            padding: 0 15px 18px;
+            margin-top: 5px;
+        }
+
+        .qty-control {
+            display: flex;
+            align-items: center;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .qty-control button {
+            background: transparent;
+            border: none;
+            color: #e63946;
+            font-size: 18px;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            padding: 0;
+            transition: 0.2s;
+            border-radius: 0;
+        }
+
+        .qty-control button:hover {
+            background: #e63946;
+            color: white;
+        }
+
+        .qty-control input {
+            width: 36px;
+            background: transparent;
+            border: none;
+            color: white;
+            text-align: center;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 0;
+        }
+
+        .btn-add {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #e63946, #c72d39);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(230, 57, 70, 0.55);
+            background: linear-gradient(135deg, #ff4d5a, #e63946);
+        }
+
+        .btn-add:active {
+            transform: scale(0.96);
+        }
+
+        .btn-add i {
+            font-size: 12px;
+        }
+
+        /* CREATIVE WARENKORB */
+        .warenkorb {
+            background: linear-gradient(145deg, #111, #0d0d0d);
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid #2a2a2a;
+            max-width: 500px;
+            margin: 60px auto 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(230, 57, 70, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warenkorb::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #e63946, #ff6b6b, #e63946);
+            background-size: 200%;
+            animation: shimmer 3s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 0%
+            }
+
+            100% {
+                background-position: 200%
+            }
+        }
+
+        .warenkorb-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #1f1f1f;
+        }
+
+        .cart-icon-wrap {
+            background: rgba(230, 57, 70, 0.1);
+            border: 1px solid rgba(230, 57, 70, 0.25);
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .warenkorb-header h2 {
+            color: white;
+            font-size: 20px;
+            margin: 0;
+        }
+
+        .cart-count {
+            margin-left: auto;
+            background: #e63946;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 3px 9px;
+            border-radius: 20px;
+        }
+
+        #liste {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px;
+        }
+
+        #liste li {
+            display: flex;
+            align-items: center;
             justify-content: space-between;
+            padding: 10px 12px;
+            margin-bottom: 6px;
+            background: #1a1a1a;
+            border-radius: 10px;
+            color: #ddd;
+            font-size: 14px;
+            animation: slideIn 0.3s ease;
         }
 
-        .order-item-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 8px;
-            object-fit: cover;
-            margin-right: 1.5rem;
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
-        .order-item-info h4 {
-            font-size: 1.4rem;
-            margin-bottom: 0.3rem;
+        #liste li .item-price {
+            color: #e63946;
+            font-weight: bold;
+            white-space: nowrap;
         }
 
-        .order-item-info p {
-            color: var(--gold);
-            font-family: var(--font-heading);
-            font-size: 1.2rem;
+        #liste li .remove-btn {
+            background: transparent;
+            border: none;
+            color: #555;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 0 0 0 10px;
+            transition: 0.2s;
+            border-radius: 0;
+            box-shadow: none;
         }
 
-        /* Customization UI */
-        .order-options {
-            padding: 1.5rem;
-            background: rgba(0, 0, 0, 0.2);
-            border-top: 1px dashed rgba(255, 255, 255, 0.1);
+        #liste li .remove-btn:hover {
+            color: #e63946;
+            background: transparent;
+            transform: none;
         }
 
-        .option-group {
-            margin-bottom: 1rem;
+        .warenkorb-leer {
+            color: #444;
+            font-size: 14px;
+            text-align: center;
+            padding: 20px 0;
+            font-style: italic;
         }
 
-        .option-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            text-transform: uppercase;
+        .gesamt-zeile {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 17px;
+            padding: 15px 0;
+            border-top: 1px solid #1f1f1f;
+            margin: 0 0 20px;
         }
 
-        .form-select,
-        .form-input-text {
+        .gesamt-zeile span {
+            color: #e63946;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .bestellen {
             width: 100%;
-            padding: 0.8rem;
-            background: var(--deep-black);
-            color: var(--cream);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
-            margin-bottom: 0.5rem;
+            padding: 16px;
+            font-size: 15px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #e63946, #c72d39);
+            border: none;
+            color: white;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.35);
         }
 
-        /* Sidebar Cart as Drawer */
-        .cart-overlay {
+        .bestellen:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(230, 57, 70, 0.5);
+        }
+
+        .bestellen:active {
+            transform: scale(0.98);
+        }
+
+        .leer-notice {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 20px 0;
+            color: #444;
+            font-size: 14px;
+        }
+
+        .leer-notice i {
+            font-size: 30px;
+            color: #2a2a2a;
+        }
+
+        /* PAYMENT MODAL */
+        .modal-overlay {
+            display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(3px);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .cart-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .cart-sidebar {
-            background: var(--deep-black);
-            padding: 2.5rem;
-            position: fixed;
-            top: 0;
-            right: -450px;
-            width: 450px;
-            max-width: 100vw;
-            height: 100vh;
-            border-left: 1px solid rgba(212, 175, 55, 0.2);
-            z-index: 1000;
-            transition: right 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .cart-sidebar.active {
-            right: 0;
-        }
-
-        .cart-close-btn {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: transparent;
-            color: var(--text-light);
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .cart-close-btn:hover {
-            color: var(--gold);
-        }
-
-        .toggle-group {
-            display: flex;
-            margin-bottom: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 4px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .toggle-btn {
-            flex: 1;
-            padding: 1rem;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .toggle-btn.active {
-            background: var(--bordeaux-red);
-            color: var(--cream);
-            font-weight: 600;
-        }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .cart-total {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--gold);
-            font-family: var(--font-heading);
-        }
-
-        .payment-methods {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 0.5rem;
-            margin-top: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .payment-methods div {
-            background: var(--deep-black);
-            padding: 0.8rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            color: var(--text-muted);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .payment-methods div:hover {
-            border-color: rgba(212, 175, 55, 0.5);
-            color: var(--cream);
-        }
-
-        .payment-methods div.active {
-            border-color: var(--gold);
-            color: var(--gold);
-            background: rgba(212, 175, 55, 0.1);
-        }
-
-        .cc-form {
-            display: none;
-            margin-top: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .cc-form.active {
-            display: block;
-            animation: heroFadeInUp 0.3s ease forwards;
-        }
-
-        .cc-input {
-            width: 100%;
-            background: var(--deep-black);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--cream);
-            padding: 0.8rem;
-            border-radius: 4px;
-            margin-bottom: 0.8rem;
-            font-size: 0.95rem;
-        }
-
-        .cc-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        /* Navbar additions */
-        .nav-icons {
-            display: flex;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
             align-items: center;
-            gap: 1rem;
+            justify-content: center;
+            backdrop-filter: blur(6px);
+            animation: fadeIn 0.3s ease;
         }
 
-        .cart-icon {
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-box {
+            background: #111;
+            border: 1px solid #2a2a2a;
+            border-radius: 20px;
+            padding: 40px 35px;
+            width: 90%;
+            max-width: 480px;
             position: relative;
-            cursor: pointer;
-            font-size: 1.2rem;
+            animation: slideUp 0.35s ease;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
         }
 
-        .cart-badge {
+        .modal-box::before {
+            content: '';
             position: absolute;
-            top: -8px;
-            right: -10px;
-            background: var(--bordeaux-red);
-            color: var(--cream);
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #e63946, #ff6b6b, #e63946);
+            border-radius: 20px 20px 0 0;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 18px;
+            background: transparent;
+            border: none;
+            color: #555;
+            font-size: 22px;
+            cursor: pointer;
+            transition: 0.2s;
             border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            font-size: 0.7rem;
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        @media (max-width: 900px) {
-            .order-layout {
-                grid-template-columns: 1fr;
+        .modal-close:hover {
+            color: #e63946;
+            background: rgba(230, 57, 70, 0.1);
+        }
+
+        .modal-title {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .modal-title h2 {
+            color: white;
+            font-size: 22px;
+        }
+
+        .modal-title p {
+            color: #888;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .modal-summary {
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 14px 16px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #aaa;
+            font-size: 14px;
+        }
+
+        .modal-summary .total-amount {
+            color: #e63946;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .payment-label {
+            color: #888;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.25s;
+            color: white;
+            font-size: 15px;
+        }
+
+        .payment-option:hover,
+        .payment-option.selected {
+            border-color: #e63946;
+            background: rgba(230, 57, 70, 0.08);
+        }
+
+        .payment-option .pay-icon {
+            font-size: 24px;
+            width: 36px;
+            text-align: center;
+        }
+
+        .payment-option .pay-info small {
+            display: block;
+            color: #555;
+            font-size: 12px;
+            margin-top: 2px;
+        }
+
+        .payment-option .pay-radio {
+            margin-left: auto;
+            width: 18px;
+            height: 18px;
+            accent-color: #e63946;
+        }
+
+        .btn-pay {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #e63946, #c72d39);
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 6px 20px rgba(230, 57, 70, 0.35);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-pay:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(230, 57, 70, 0.5);
+        }
+
+        /* CARD FORM */
+        .card-form {
+            display: block;
+            margin-bottom: 20px;
+            animation: slideDown 0.3s ease;
+        }
+
+        .card-form.hidden {
+            display: none;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
             }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-form-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #aaa;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .card-form-grid {
+            display: grid;
+            gap: 10px;
+        }
+
+        .card-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .card-input-group label {
+            color: #888;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .card-input-group input {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 8px;
+            padding: 11px 14px;
+            color: white;
+            font-size: 15px;
+            transition: 0.25s;
+            width: 100%;
+            letter-spacing: 1px;
+        }
+
+        .card-input-group input:focus {
+            outline: none;
+            border-color: #e63946;
+            box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.15);
+        }
+
+        .card-input-group input::placeholder {
+            color: #444;
+            letter-spacing: 0;
+        }
+
+        .card-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .card-brand-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .card-brand {
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 6px;
+            padding: 5px 10px;
+            color: #666;
+            font-size: 12px;
+            font-weight: bold;
         }
     </style>
 </head>
 
-<body>
+<body style="background:#000;">
 
-    <!-- Full Header Navigation with Cart Icon -->
+    <!-- PAYMENT MODAL -->
+    <div class="modal-overlay" id="payment-modal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal()"><i class="fas fa-times"></i></button>
+
+            <div class="modal-title">
+                <h2>&#128274; Zahlung auswählen</h2>
+                <p>Wählen Sie Ihre bevorzugte Zahlungsmethode</p>
+            </div>
+
+            <div class="modal-summary">
+                <span>Bestellsumme</span>
+                <span class="total-amount" id="modal-total">0.00 &euro;</span>
+            </div>
+
+            <p class="payment-label">Zahlungsmethode</p>
+
+            <div class="payment-options">
+                <label class="payment-option selected" onclick="selectPayment(this, 'Kreditkarte')">
+                    <span class="pay-icon">&#x1F4B3;</span>
+                    <span class="pay-info">
+                        Kreditkarte
+                        <small>Visa, Mastercard, Amex</small>
+                    </span>
+                    <input class="pay-radio" type="radio" name="payment" value="Kreditkarte" checked>
+                </label>
+
+                <label class="payment-option" onclick="selectPayment(this, 'PayPal')">
+                    <span class="pay-icon">&#x1F4B0;</span>
+                    <span class="pay-info">
+                        PayPal
+                        <small>Schnell &amp; sicher &uuml;ber PayPal bezahlen</small>
+                    </span>
+                    <input class="pay-radio" type="radio" name="payment" value="PayPal">
+                </label>
+
+                <label class="payment-option" onclick="selectPayment(this, 'Barzahlung')">
+                    <span class="pay-icon">&#x1F4B5;</span>
+                    <span class="pay-info">
+                        Barzahlung bei Lieferung
+                        <small>Bezahlen Sie bei Erhalt der Bestellung</small>
+                    </span>
+                    <input class="pay-radio" type="radio" name="payment" value="Barzahlung">
+                </label>
+            </div>
+
+            <!-- CREDIT CARD FORM -->
+            <div class="card-form" id="card-form">
+                <div class="card-form-title">
+                    <i class="fas fa-credit-card"></i>
+                    Kartendaten eingeben
+                </div>
+                <div class="card-brand-row">
+                    <span class="card-brand">VISA</span>
+                    <span class="card-brand">MC</span>
+                    <span class="card-brand">AMEX</span>
+                </div>
+                <div class="card-form-grid">
+                    <div class="card-input-group">
+                        <label>Karteninhaber</label>
+                        <input type="text" id="card-name" placeholder="Max Mustermann" maxlength="30">
+                    </div>
+                    <div class="card-input-group">
+                        <label>Kartennummer</label>
+                        <input type="text" id="card-number" placeholder="0000 0000 0000 0000" maxlength="19"
+                            oninput="formatCardNumber(this)">
+                    </div>
+                    <div class="card-row">
+                        <div class="card-input-group">
+                            <label>Ablaufdatum</label>
+                            <input type="text" id="card-expiry" placeholder="MM / JJ" maxlength="7"
+                                oninput="formatExpiry(this)">
+                        </div>
+                        <div class="card-input-group">
+                            <label>CVV / CVC</label>
+                            <input type="password" id="card-cvv" placeholder="&bull;&bull;&bull;" maxlength="4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAYPAL FORM -->
+            <div class="card-form hidden" id="paypal-form">
+                <div class="card-form-title">
+                    <i class="fas fa-paypal"></i>
+                    Mit PayPal anmelden
+                </div>
+                <div
+                    style="background:#1a1a1a; border-radius:10px; padding:12px 14px; margin-bottom:12px; display:flex; align-items:center; gap:8px;">
+                    <span style="font-size:22px;">&#x1F4B0;</span>
+                    <span style="color:#aaa; font-size:13px;">Sie werden sicher zu PayPal weitergeleitet.</span>
+                </div>
+                <div class="card-form-grid">
+                    <div class="card-input-group">
+                        <label>PayPal E-Mail-Adresse</label>
+                        <input type="email" id="paypal-email" placeholder="muster@email.de">
+                    </div>
+                    <div class="card-input-group">
+                        <label>PayPal Passwort</label>
+                        <input type="password" id="paypal-pw"
+                            placeholder="&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;&#x2022;">
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-pay" onclick="confirmPayment()">
+                <i class="fas fa-lock"></i>&nbsp; Jetzt bezahlen
+            </button>
+        </div>
+    </div>
+
     <nav class="navbar scrolled">
         <a href="index.html" class="nav-logo">
             <h1>Sakura<span>.</span></h1>
         </a>
-
-        <ul class="nav-links" style="margin-left: auto; margin-right: 2rem;">
-            <li><a href="index.html">Startseite</a></li>
-            <li><a href="menu.html">Speisekarte</a></li>
-            <li><a href="about.html">Über uns</a></li>
-            <li><a href="ordering.html" class="active">Online Bestellen</a></li>
-            <li><a href="contact.html">Kontakt & Impressum</a></li>
-        </ul>
-
-        <div class="nav-icons" style="padding-right: 2rem; display: flex;">
-            <div class="cart-icon" id="cartIcon" style="cursor: pointer;">
-                🛒
-                <span class="cart-badge">2</span>
-            </div>
-        </div>
-
         <div class="hamburger"><span></span><span></span><span></span></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Startseite</a></li>
+            <li><a href="menu.html">Menü</a></li>
+            <li><a href="about.html">Über uns</a></li>
+            <li><a href="ordering.html" class="active">Bestellen</a></li>
+            <li><a href="contact.html">Kontakt</a></li>
+        </ul>
     </nav>
 
-    <header class="hero"
-        style="position: relative; min-height: 50vh; display: flex; align-items: center; justify-content: center; text-align: center; background: url('assets/images/fresh_ingredients_1772543099300.png') center/cover no-repeat;">
-        <div style="position: absolute; inset: 0; background: rgba(17, 17, 17, 0.7); z-index: 1;"></div>
-        <div class="container" style="position: relative; z-index: 2; padding: 4rem 2rem;">
-            <h2
-                style="font-size: 4rem; color: var(--cream); font-family: var(--font-heading); margin-bottom: 1rem; text-shadow: 0 4px 15px rgba(0,0,0,0.8);">
-                Online Bestellen</h2>
-            <p
-                style="color: var(--gold); font-size: 1.3rem; margin-bottom: 2.5rem; max-width: 600px; margin-left: auto; margin-right: auto; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">
-                Ihre Lieblingsgerichte, frisch und authentisch zubereitet. Wählen Sie zwischen Lieferung oder Abholung
-                und genießen Sie Sakura Sushi bequem zu Hause.
-            </p>
-            <a href="#menu-items" class="btn btn-primary"
-                style="padding: 1rem 3rem; font-size: 1.2rem; border-radius: 30px; box-shadow: 0 10px 20px rgba(139,0,0,0.4);">Bestellung
-                starten</a>
-        </div>
-    </header>
+    <section class="bestellung">
 
-    <div class="container">
-        <div class="order-layout">
-            <!-- Items Area -->
-            <div class="order-items" id="menu-items">
-                <div class="menu-list">
+        <h1>Online Bestellung</h1>
+        <p class="sub">Bestellen Sie Ihr Lieblingssushi direkt online</p>
 
-                    <!-- Item 1 with customization -->
-                    <div class="order-item">
-                        <div class="order-item-main">
-                            <div style="display:flex; align-items:center;">
-                                <img src="assets/images/sushi_dragon_roll_closeup_1772543114074.png"
-                                    class="order-item-img" alt="Dragon Roll">
-                                <div class="order-item-info">
-                                    <h4>Dragon Roll</h4>
-                                    <p>€21</p>
-                                </div>
-                            </div>
-                            <div style="text-align: center;">
-                                <button class="btn btn-outline" style="width: 80%; margin-top: 1.5rem;">In den
-                                    Warenkorb</button>
-                            </div>
-                        </div>
-                        <div class="order-options">
-                            <div class="option-group">
-                                <label>Portionsgröße</label>
-                                <select class="form-select">
-                                    <option>Standard (8 Stk.)</option>
-                                    <option>Groß (12 Stk.) + €9</option>
-                                </select>
-                            </div>
-                            <div class="option-group">
-                                <label>Zusätzliche Zutaten</label>
-                                <select class="form-select">
-                                    <option>Keine</option>
-                                    <option>Extra Aal + €4</option>
-                                    <option>Extra Avocado + €2</option>
-                                </select>
-                            </div>
-                            <div class="option-group">
-                                <label>Saucenauswahl & Schärfegrad</label>
-                                <div style="display:flex; gap:1rem;">
-                                    <select class="form-select">
-                                        <option>Unagi-Sauce (Standard)</option>
-                                        <option>Spicy Mayo</option>
-                                        <option>Ponzu-Sauce</option>
-                                    </select>
-                                    <select class="form-select">
-                                        <option>Mild</option>
-                                        <option>Mittel</option>
-                                        <option>Scharf</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="option-group">
-                                <label>Besondere Anweisungen</label>
-                                <input type="text" class="form-input-text" placeholder="z.B. kein Sesam, extra Ingwer">
-                            </div>
-                        </div>
-                    </div>
+        <!-- NIGIRI -->
+        <h2 class="menu-category">Nigiri</h2>
+        <div class="menu-grid">
+            <div class="item">
+                <img src="assets/images/sushi_nigiri_1772541891904.png" alt="Salmon Nigiri">
+                <h3>Salmon Nigiri</h3>
+                <p>Frischer Lachs auf Sushi-Reis.</p>
+                <span class="preis">6 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="nigiri1">
+                    <button onclick="addItem('Salmon Nigiri', 6, 'nigiri1')">Hinzufügen</button>
                 </div>
             </div>
-
-            <!-- Cart Sidebar -->
-            <div class="cart-overlay" id="cartOverlay"></div>
-            <div class="cart-sidebar" id="cartSidebar">
-                <button class="cart-close-btn" id="cartCloseBtn">✕</button>
-                <h3 style="margin-bottom: 1.5rem; font-size: 1.8rem; padding-top: 1rem;">Ihre Bestellung</h3>
-                <div class="toggle-group">
-                    <div class="toggle-btn active">Lieferung</div>
-                    <div class="toggle-btn">Abholung</div>
+            <div class="item">
+                <img src="assets/images/nigiri_angle1_1772545650813.png" alt="Tuna Nigiri">
+                <h3>Tuna Nigiri</h3>
+                <p>Thunfisch auf traditionellem Sushi-Reis.</p>
+                <span class="preis">7 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="nigiri2">
+                    <button onclick="addItem('Tuna Nigiri', 7, 'nigiri2')">Hinzufügen</button>
                 </div>
-
-                <p
-                    style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 1rem;">
-                    Geschätzte Dauer: <strong style="color:var(--cream);">45 Min.</strong></p>
-
-                <div class="cart-items">
-                    <div class="cart-item">
-                        <span>1x Dragon Roll (Standard, Mild)</span>
-                        <span>€21.00</span>
-                    </div>
-                    <div class="cart-item">
-                        <span>1x Bluefin Nigiri</span>
-                        <span>€18.00</span>
-                    </div>
-                    <div class="cart-item" style="color: var(--cream);">
-                        <span>Liefergebühr</span>
-                        <span>€2.50</span>
-                    </div>
+            </div>
+            <div class="item">
+                <img src="assets/images/nigiri_angle2_1772545667454.png" alt="Eel Nigiri">
+                <h3>Eel Nigiri</h3>
+                <p>Gegrillter Aal mit Teriyaki Sauce.</p>
+                <span class="preis">9 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="nigiri3">
+                    <button onclick="addItem('Eel Nigiri', 9, 'nigiri3')">Hinzufügen</button>
                 </div>
-
-                <div class="option-group" style="margin-top: 2rem;">
-                    <input type="text" class="form-input-text" placeholder="Rabattcode / Treuekarte">
+            </div>
+            <div class="item">
+                <img src="assets/images/sushi_closeup_plating_1772543075112.png" alt="Shrimp Nigiri">
+                <h3>Shrimp Nigiri</h3>
+                <p>Gekochte Garnele auf Sushi-Reis.</p>
+                <span class="preis">7 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="nigiri4">
+                    <button onclick="addItem('Shrimp Nigiri', 7, 'nigiri4')">Hinzufügen</button>
                 </div>
-
-                <div class="cart-total">
-                    <span>Gesamt</span>
-                    <span>€41.50</span>
-                </div>
-
-                <div class="payment-methods">
-                    <div class="pay-btn" data-method="paypal">PayPal</div>
-                    <div class="pay-btn active" data-method="cc">Kreditkarte</div>
-                    <div class="pay-btn" data-method="apple">Apple Pay</div>
-                </div>
-
-                <!-- Secure CC Form -->
-                <div class="cc-form active" id="ccForm">
-                    <input type="text" class="cc-input" placeholder="Kartennummer" maxlength="19">
-                    <div class="cc-row">
-                        <input type="text" class="cc-input" placeholder="MM/JJ" maxlength="5">
-                        <input type="password" class="cc-input" placeholder="CVC" maxlength="3">
-                    </div>
-                    <input type="text" class="cc-input" style="margin-bottom: 0;" placeholder="Name auf Karte">
-                </div>
-
-                <button class="btn btn-primary" id="checkoutBtn"
-                    style="width: 100%; text-align: center; font-size: 1.2rem; padding: 1.2rem; margin-top: 2rem;">Zur
-                    Kasse</button>
             </div>
         </div>
-    </div>
 
-    <!-- Complete Footer -->
+        <!-- MAKI -->
+        <h2 class="menu-category">Maki</h2>
+        <div class="menu-grid">
+            <div class="item">
+                <img src="assets/images/sushi_maki_1772541910733.png" alt="Tuna Maki">
+                <h3>Tuna Maki</h3>
+                <p>Thunfisch eingerollt in Nori.</p>
+                <span class="preis">5 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="maki1">
+                    <button onclick="addItem('Tuna Maki', 5, 'maki1')">Hinzufügen</button>
+                </div>
+            </div>
+            <div class="item">
+                <img src="assets/images/sushi_sashimi_1772541924274.png" alt="Salmon Maki">
+                <h3>Salmon Maki</h3>
+                <p>Lachs und Sushi-Reis.</p>
+                <span class="preis">5 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="maki2">
+                    <button onclick="addItem('Salmon Maki', 5, 'maki2')">Hinzufügen</button>
+                </div>
+            </div>
+            <div class="item">
+                <img src="assets/images/fresh_ingredients_1772543099300.png" alt="Gurken Maki">
+                <h3>Gurken Maki</h3>
+                <p>Frische Gurke im Nori-Blatt.</p>
+                <span class="preis">4 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="maki3">
+                    <button onclick="addItem('Gurken Maki', 4, 'maki3')">Hinzufügen</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SPEZIAL ROLLS -->
+        <h2 class="menu-category">Spezial Rolls</h2>
+        <div class="menu-grid">
+            <div class="item">
+                <img src="assets/images/sushi_dragon_roll_closeup_1772543114074.png" alt="Dragon Roll">
+                <h3>Dragon Roll</h3>
+                <p>Tempura Garnelen mit Avocado.</p>
+                <span class="preis">12 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="roll1">
+                    <button onclick="addItem('Dragon Roll', 12, 'roll1')">Hinzufügen</button>
+                </div>
+            </div>
+            <div class="item">
+                <img src="assets/images/sushi_combo_platter_1772543923289.png" alt="California Roll">
+                <h3>California Roll</h3>
+                <p>Krabbe, Avocado und Gurke.</p>
+                <span class="preis">8 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="roll2">
+                    <button onclick="addItem('California Roll', 8, 'roll2')">Hinzufügen</button>
+                </div>
+            </div>
+            <div class="item">
+                <img src="assets/images/hero_sushi_prep_1772541862193.png" alt="Spicy Tuna Roll">
+                <h3>Spicy Tuna Roll</h3>
+                <p>Scharfer Thunfisch mit Spezial Sauce.</p>
+                <span class="preis">10 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="roll3">
+                    <button onclick="addItem('Spicy Tuna Roll', 10, 'roll3')">Hinzufügen</button>
+                </div>
+            </div>
+            <div class="item">
+                <img src="assets/images/sushi_prep_hero_bg_1772613876074.png" alt="Rainbow Roll">
+                <h3>Rainbow Roll</h3>
+                <p>Verschiedene Fischsorten auf Sushi-Roll.</p>
+                <span class="preis">13 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="roll4">
+                    <button onclick="addItem('Rainbow Roll', 13, 'roll4')">Hinzufügen</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VEGETARISCH -->
+        <h2 class="menu-category">Vegetarisch</h2>
+        <div class="menu-grid">
+            <div class="item">
+                <img src="assets/images/edamame_sea_salt_1772613889838.png" alt="Avocado Roll">
+                <h3>Avocado Roll</h3>
+                <p>Frische Avocado mit Sushi-Reis.</p>
+                <span class="preis">7 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="veg1">
+                    <button onclick="addItem('Avocado Roll', 7, 'veg1')">Hinzufügen</button>
+                </div>
+            </div>
+            <div class="item">
+                <img src="assets/images/fresh_ingredients_1772543099300.png" alt="Veggie Roll">
+                <h3>Veggie Roll</h3>
+                <p>Gurke, Avocado und Karotte.</p>
+                <span class="preis">7 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="veg2">
+                    <button onclick="addItem('Veggie Roll', 7, 'veg2')">Hinzufügen</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUSHI SETS -->
+        <h2 class="menu-category">Sushi Sets</h2>
+        <div class="menu-grid">
+            <div class="item">
+                <img src="assets/images/sushi_nigiri_1772541891904.png" alt="Sushi Set Klein">
+                <h3>Sushi Set Klein</h3>
+                <p>8 Stück gemischtes Sushi.</p>
+                <span class="preis">14 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="set1">
+                    <button onclick="addItem('Sushi Set Klein', 14, 'set1')">Hinzufügen</button>
+                </div>
+            </div>
+            <div class="item">
+                <img src="assets/images/sushi_combo_platter_1772543923289.png" alt="Sushi Set Mittel">
+                <h3>Sushi Set Mittel</h3>
+                <p>16 Stück gemischtes Sushi.</p>
+                <span class="preis">24 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="set2">
+                    <button onclick="addItem('Sushi Set Mittel', 24, 'set2')">Hinzufügen</button>
+                </div>
+            </div>
+            <div class="item">
+                <img src="assets/images/hero_sushi_video_placeholder_1772544824651.png" alt="Sushi Set Groß">
+                <h3>Sushi Set Groß</h3>
+                <p>24 Stück gemischtes Sushi.</p>
+                <span class="preis">34 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="set3">
+                    <button onclick="addItem('Sushi Set Groß', 34, 'set3')">Hinzufügen</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- GETRÄNKE -->
+        <h2 class="menu-category">Getränke</h2>
+        <div class="menu-grid">
+            <div class="item">
+                <img src="assets/images/japanese_green_tea_1772543876253.png" alt="Grüner Tee">
+                <h3>Grüner Tee</h3>
+                <p>Traditioneller japanischer Tee.</p>
+                <span class="preis">3 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="drink1">
+                    <button onclick="addItem('Grüner Tee', 3, 'drink1')">Hinzufügen</button>
+                </div>
+            </div>
+            <div class="item">
+                <img src="assets/images/sake_bottle_1772543894019.png" alt="Sake">
+                <h3>Sake</h3>
+                <p>Japanischer Reiswein.</p>
+                <span class="preis">6 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="drink2">
+                    <button onclick="addItem('Sake', 6, 'drink2')">Hinzufügen</button>
+                </div>
+            </div>
+            <div class="item">
+                <img src="assets/images/japanese_soft_drinks_1772613935223.png" alt="Softgetränk">
+                <h3>Softgetränk</h3>
+                <p>Erfrischendes Softgetränk.</p>
+                <span class="preis">3 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="drink3">
+                    <button onclick="addItem('Softgetränk', 3, 'drink3')">Hinzufügen</button>
+                </div>
+            </div>
+            <div class="item">
+                <img src="assets/images/sakura_cocktail_1772613920112.png" alt="Mineralwasser">
+                <h3>Mineralwasser</h3>
+                <p>Still oder Sprudel.</p>
+                <span class="preis">2.5 €</span>
+                <div class="bestell-box">
+                    <input type="number" value="1" min="1" id="drink4">
+                    <button onclick="addItem('Mineralwasser', 2.5, 'drink4')">Hinzufügen</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- WARENKORB -->
+        <div class="warenkorb">
+            <div class="warenkorb-header">
+                <div class="cart-icon-wrap">🛒</div>
+                <h2>Ihre Bestellung</h2>
+                <span class="cart-count" id="cart-count">0</span>
+            </div>
+            <ul id="liste"></ul>
+            <div class="leer-notice" id="leer-hinweis"><i class="fas fa-shopping-basket"></i><span>Noch keine Artikel
+                    hinzugefügt.</span></div>
+            <div class="gesamt-zeile"><span>Gesamt</span><span id="gesamt">0.00 €</span></div>
+            <button class="bestellen" onclick="bestellungAbschicken()"><i class="fas fa-paper-plane"></i>&nbsp;
+                Bestellung abschicken</button>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
                     <h4>Sakura.</h4>
                     <p>Handgemachtes Sushi. Inspiriert von Japan.</p>
-                    <p>Erleben Sie pure Eleganz und authentische kulinarische Kunst.</p>
                     <div style="margin-top: 1rem; display: flex; gap: 1rem;">
-                        <a href="#" style="color: var(--gold); font-size: 1.2rem;">IG</a>
-                        <a href="#" style="color: var(--gold); font-size: 1.2rem;">FB</a>
-                        <a href="#" style="color: var(--gold); font-size: 1.2rem;">TW</a>
+                        <a href="#" class="text-gold"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gold"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gold"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -477,100 +969,124 @@
                         <li><a href="index.html">Startseite</a></li>
                         <li><a href="menu.html">Speisekarte</a></li>
                         <li><a href="about.html">Über uns</a></li>
-                        <li><a href="ordering.html">Online Bestellen</a></li>
+                        <li><a href="ordering.html">Bestellen</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Kontakt</h4>
-                    <p>Robert-Bosch-Breite 10,<br>37079 Göttingen, Deutschland</p>
+                    <p>Robert-Bosch-Breite 10,<br>37079 Göttingen</p>
                     <p>+49 155 66284478</p>
-                    <p><a href="mailto:info@webtech-agentur.de">service@sakura-sushi-goettingen.de</a></p>
+                    <p><a href="mailto:service@sakura-sushi-goettingen.de">service@sakura-sushi-goettingen.de</a></p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Sakura Sushi. Alle Rechte vorbehalten. | <a href="contact.html">Impressum</a> | <a
-                        href="contact.html">Datenschutz</a> | <a href="contact.html">AGB</a></p>
+                <p>&copy; 2026 Sakura Sushi. | <a href="contact.html">Impressum</a> | <a
+                        href="contact.html">Datenschutz</a></p>
             </div>
         </div>
     </footer>
 
     <script src="assets/js/main.js"></script>
     <script>
-        document.querySelectorAll('.toggle-btn').forEach(btn => {
-            btn.addEventListener('click', function () {
-                document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
+        let total = 0;
+        let itemCount = 0;
 
-        // Cart Toggle Logic
-        const cartIconBtn = document.getElementById('cartIcon');
-        const cartSidebarEl = document.getElementById('cartSidebar');
-        const cartOverlayEl = document.getElementById('cartOverlay');
-        const cartCloseBtnEl = document.getElementById('cartCloseBtn');
+        function addItem(name, price, inputId) {
+            let qty = parseInt(document.getElementById(inputId).value);
+            if (qty < 1) return;
 
-        function toggleCart() {
-            if (cartSidebarEl && cartOverlayEl) {
-                cartSidebarEl.classList.toggle('active');
-                cartOverlayEl.classList.toggle('active');
-                document.body.style.overflow = cartSidebarEl.classList.contains('active') ? 'hidden' : '';
+            let list = document.getElementById("liste");
+            let hinweis = document.getElementById("leer-hinweis");
+            hinweis.style.display = "none";
+
+            let lineTotal = (price * qty).toFixed(2);
+            let li = document.createElement("li");
+            li.innerHTML = `<span>${qty}&times; ${name}</span><span class="item-price">${lineTotal} &euro;</span><button class="remove-btn" onclick="removeItem(this, ${price * qty})"><i class="fas fa-times"></i></button>`;
+            list.appendChild(li);
+
+            total += price * qty;
+            itemCount += qty;
+            document.getElementById("gesamt").textContent = total.toFixed(2) + " €";
+            document.getElementById("cart-count").textContent = itemCount;
+        }
+
+        function removeItem(btn, amount) {
+            let li = btn.parentElement;
+            li.style.opacity = "0";
+            li.style.transition = "opacity 0.3s";
+            setTimeout(() => {
+                li.remove();
+                total = Math.max(0, total - amount);
+                document.getElementById("gesamt").textContent = total.toFixed(2) + " €";
+                let remaining = document.querySelectorAll("#liste li").length;
+                itemCount = remaining;
+                document.getElementById("cart-count").textContent = remaining;
+                if (remaining === 0) document.getElementById("leer-hinweis").style.display = "flex";
+            }, 300);
+        }
+
+        function selectPayment(el, method) {
+            document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+            el.classList.add('selected');
+
+            let cardForm = document.getElementById('card-form');
+            let paypalForm = document.getElementById('paypal-form');
+
+            cardForm.classList.add('hidden');
+            paypalForm.classList.add('hidden');
+
+            if (method === 'Kreditkarte') {
+                cardForm.classList.remove('hidden');
+            } else if (method === 'PayPal') {
+                paypalForm.classList.remove('hidden');
             }
         }
 
-        if (cartIconBtn) cartIconBtn.addEventListener('click', toggleCart);
-        if (cartOverlayEl) cartOverlayEl.addEventListener('click', toggleCart);
-        if (cartCloseBtnEl) cartCloseBtnEl.addEventListener('click', toggleCart);
+        function formatCardNumber(input) {
+            let val = input.value.replace(/\D/g, '').substring(0, 16);
+            input.value = val.replace(/(.{4})/g, '$1 ').trim();
+        }
 
-        // Payment Selection Logic
-        const payBtns = document.querySelectorAll('.pay-btn');
-        const ccForm = document.getElementById('ccForm');
-        let selectedPayment = 'cc';
-
-        payBtns.forEach(btn => {
-            btn.addEventListener('click', function () {
-                payBtns.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                selectedPayment = this.getAttribute('data-method');
-
-                if (selectedPayment === 'cc') {
-                    ccForm.classList.add('active');
-                } else {
-                    ccForm.classList.remove('active');
-                }
-            });
-        });
-
-        // Checkout Button Logic
-        const checkoutBtn = document.getElementById('checkoutBtn');
-        checkoutBtn.addEventListener('click', function () {
-            if (selectedPayment === 'paypal') {
-                alert("Weiterleitung zu PayPal. Sitzung wird gesichert...");
-                window.open("https://www.paypal.com/checkoutnow", "_blank");
-            } else if (selectedPayment === 'apple') {
-                alert("Apple Pay Fenster wird geöffnet...");
-                if (window.PaymentRequest) {
-                    try {
-                        const supportedInstruments = [{ supportedMethods: 'https://apple.com/apple-pay' }];
-                        const details = { total: { label: 'Gesamt', amount: { currency: 'EUR', value: '41.50' } } };
-                        new PaymentRequest(supportedInstruments, details).show().catch(e => {
-                            alert("Apple Pay wurde vom Nutzer abgebrochen oder ist in dieser Umgebung nicht vollständig konfiguriert.");
-                        });
-                    } catch (e) {
-                        alert("Apple Pay nicht konfiguriert - Starte Fallback-Schnittstelle...");
-                    }
-                }
-            } else if (selectedPayment === 'cc') {
-                const inputs = ccForm.querySelectorAll('.cc-input');
-                let valid = true;
-                inputs.forEach(i => { if (!i.value) valid = false; });
-
-                if (!valid) {
-                    alert("Bitte füllen Sie alle Kreditkartenfelder aus.");
-                } else {
-                    alert("Zahlung per Kreditkarte erfolgreich verarbeitet! Vielen Dank für Ihre Bestellung.");
-                    toggleCart();
-                }
+        function formatExpiry(input) {
+            let val = input.value.replace(/\D/g, '').substring(0, 4);
+            if (val.length >= 2) {
+                input.value = val.substring(0, 2) + ' / ' + val.substring(2);
+            } else {
+                input.value = val;
             }
+        }
+
+        function bestellungAbschicken() {
+            if (total === 0) {
+                alert("Bitte fügen Sie zuerst Artikel zur Bestellung hinzu.");
+                return;
+            }
+            document.getElementById('modal-total').textContent = total.toFixed(2) + ' \u20ac';
+            document.getElementById('payment-modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('payment-modal').classList.remove('active');
+        }
+
+        function confirmPayment() {
+            let method = document.querySelector('input[name="payment"]:checked').value;
+            closeModal();
+            setTimeout(() => {
+                alert('\u2705 Bestellung über ' + total.toFixed(2) + ' \u20ac erfolgreich mit ' + method + ' abgeschickt!\nVielen Dank, wir liefern in ca. 30-45 Minuten!');
+                // Reset cart
+                total = 0;
+                itemCount = 0;
+                document.getElementById('liste').innerHTML = '';
+                document.getElementById('gesamt').textContent = '0.00 \u20ac';
+                document.getElementById('cart-count').textContent = '0';
+                document.getElementById('leer-hinweis').style.display = 'flex';
+            }, 300);
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('payment-modal').addEventListener('click', function (e) {
+            if (e.target === this) closeModal();
         });
     </script>
 </body>

@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sakura Sushi | Handgemachtes Sushi. Inspiriert von Japan.</title>
+    <title>Sakura Sushi | Frisches Sushi erleben</title>
     <meta name="description"
         content="Erleben Sie erstklassiges handgemachtes Sushi bei Sakura Sushi. Moderne Eleganz trifft auf traditionelle japanische Ästhetik.">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
@@ -24,310 +25,123 @@
         </div>
         <ul class="nav-links">
             <li><a href="index.html" class="active">Startseite</a></li>
-            <li><a href="menu.html">Speisekarte</a></li>
+            <li><a href="menu.html">Menü</a></li>
             <li><a href="about.html">Über uns</a></li>
             <li><a href="ordering.html">Online Bestellen</a></li>
-            <li><a href="contact.html">Kontakt & Impressum</a></li>
+            <li><a href="contact.html">Kontakt</a></li>
         </ul>
     </nav>
 
-    <!-- Clean 2-Column Hero Section -->
-    <header class="hero split-hero" id="heroSection">
-        <style>
-            .split-hero {
-                min-height: 100vh;
-                display: flex;
-                align-items: center;
-                background-color: var(--deep-black);
-                padding-top: 80px;
-                /* offset for navbar */
-            }
-
-            .split-hero-container {
-                width: 100%;
-                max-width: 1400px;
-                margin: 0 auto;
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 5rem;
-                align-items: center;
-                padding: 4rem 2rem;
-            }
-
-            .split-hero-img-wrapper {
-                position: relative;
-                width: 100%;
-                height: 70vh;
-                min-height: 500px;
-                border-radius: 16px;
-                overflow: hidden;
-                box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-                opacity: 0;
-                transform: translateX(-50px);
-                animation: slideInLeft 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-            }
-
-            .split-hero-img-wrapper img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                transition: transform 10s ease;
-            }
-
-            .split-hero-img-wrapper:hover img {
-                transform: scale(1.05);
-            }
-
-            .split-hero-content {
-                padding-right: 2rem;
-            }
-
-            .split-hero-title {
-                font-size: 5rem;
-                font-family: var(--font-heading);
-                color: var(--cream);
-                line-height: 1.1;
-                margin-bottom: 2rem;
-                opacity: 0;
-                transform: translateX(50px);
-                animation: slideInRight 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.2s;
-            }
-
-            .split-hero-subtitle {
-                font-size: 1.4rem;
-                color: var(--text-muted);
-                line-height: 1.8;
-                margin-bottom: 3rem;
-                opacity: 0;
-                transform: translateX(50px);
-                animation: slideInRight 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.4s;
-            }
-
-            .split-hero-cta {
-                display: flex;
-                gap: 1.5rem;
-                opacity: 0;
-                transform: translateX(50px);
-                animation: slideInRight 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.6s;
-            }
-
-            @keyframes slideInLeft {
-                to {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
-            }
-
-            @keyframes slideInRight {
-                to {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
-            }
-
-            .btn-split-primary {
-                background: var(--bordeaux-red);
-                color: var(--cream);
-                padding: 1.2rem 3.5rem;
-                font-size: 1.2rem;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                border-radius: 4px;
-                border: 1px solid transparent;
-                transition: all 0.3s ease;
-                display: inline-block;
-                box-shadow: 0 10px 20px rgba(139, 0, 0, 0.2);
-            }
-
-            .btn-split-primary:hover {
-                background: transparent;
-                border-color: var(--bordeaux-red);
-                box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
-            }
-
-            .btn-split-outline {
-                background: transparent;
-                color: var(--cream);
-                padding: 1.2rem 3.5rem;
-                font-size: 1.2rem;
-                text-transform: uppercase;
-                letter-spacing: 2px;
-                border-radius: 4px;
-                border: 1px solid rgba(255, 255, 255, 0.3);
-                transition: all 0.3s ease;
-                display: inline-block;
-            }
-
-            .btn-split-outline:hover {
-                background: rgba(255, 255, 255, 0.1);
-                border-color: var(--gold);
-                color: var(--gold);
-            }
-
-            @media (max-width: 991px) {
-                .split-hero-container {
-                    grid-template-columns: 1fr;
-                    padding-top: 2rem;
-                    gap: 3rem;
-                }
-
-                .split-hero-title {
-                    font-size: 3.5rem;
-                }
-
-                .split-hero-img-wrapper {
-                    height: 50vh;
-                    min-height: 400px;
-                    order: -1;
-                }
-
-                .split-hero-content {
-                    padding-right: 0;
-                    text-align: center;
-                }
-
-                .split-hero-cta {
-                    justify-content: center;
-                }
-            }
-        </style>
-
-        <div class="split-hero-container">
-            <!-- Left Image Side -->
-            <div class="split-hero-img-wrapper">
-                <img src="assets/images/sushi_prep_hero_bg_1772613876074.png" alt="Premium Sushi Zubereitung">
-            </div>
-
-            <!-- Right Content Side -->
-            <div class="split-hero-content">
-                <h2 class="split-hero-title">Handwerkskunst<br>in jedem Bissen.</h2>
-                <p class="split-hero-subtitle">
-                    Erleben Sie von Tokio inspiriertes Sushi auf höchstem Niveau. Eine Symphonie aus Authentizität
-                    und moderner Eleganz.
-                </p>
-                <div class="split-hero-cta">
-                    <a href="ordering.html" class="btn-split-primary">Jetzt Bestellen</a>
-                    <a href="menu.html" class="btn-split-outline">Speisekarte</a>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Intro Section -->
-    <section class="section intro">
-        <div class="container">
-            <div class="intro-text">
-                <h2>Tradition trifft Eleganz</h2>
-                <p>Im Sakura Sushi erzählt jede Rolle eine Geschichte. Unsere Meisterköche bringen jahrelange Erfahrung
-                    aus Tokio mit, um Gerichte zu kreieren, die die japanischen kulinarischen Traditionen ehren und
-                    gleichzeitig eine moderne, anspruchsvolle Ästhetik verkörpern.
-                </p>
-                <p>Wir beziehen nur Fisch der höchsten Güteklasse und die frischesten Bio-Zutaten, um ein
-                    unvergessliches kulinarisches Erlebnis zu gewährleisten.</p>
-                <br>
-                <a href="about.html" class="btn btn-outline">Unsere Geschichte</a>
-            </div>
-            <div class="intro-image">
-                <img src="assets/images/chef_portrait_1772541942251.png" alt="Master Sushi Chef">
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-box">
+            <h1>Frisches Sushi<br>direkt vom Meister</h1>
+            <p>
+                Genießen Sie authentische japanische Küche mit frischen Zutaten,
+                traditioneller Zubereitung und modernem Ambiente.
+            </p>
+            <div class="buttons">
+                <a href="menu.html" class="btn-menu">🍣 Menü ansehen</a>
+                <a href="ordering.html" class="btn-reserve">📅 Tisch reservieren</a>
             </div>
         </div>
     </section>
 
-    <!-- Bestsellers -->
-    <section class="bestsellers" style="background-color: var(--deep-black); padding: 8rem 0;">
+    <!-- POPULAR SUSHI SECTION -->
+    <section class="popular-sushi">
         <div class="container">
-            <div class="section-header" style="margin-bottom: 5rem;">
-                <h2 style="font-size: 3.5rem;">Unsere Spezialitäten</h2>
-                <p style="color: var(--text-muted); font-size: 1.2rem; margin-top: 1rem;">Erleben Sie den Höhepunkt
-                    unserer kulinarischen Handwerkskunst.</p>
-            </div>
-
-            <div class="creative-grid"
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem;">
-                <!-- Signature 1 (Dragon Roll) -->
-                <div class="creative-card">
-                    <div class="creative-img-wrapper"
-                        style="height: 380px; margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.5);">
-                        <img src="assets/images/sushi_dragon_roll_closeup_1772543114074.png" alt="Dragon Maki Roll"
-                            style="height: 100%; width: 100%; object-fit: cover; transition: transform 0.5s ease;">
-                    </div>
-                    <div class="creative-info text-center" style="padding: 1.5rem 0;">
-                        <span class="badge"
-                            style="position:static; display:inline-block; margin-bottom: 1rem; background: var(--gold); color: var(--deep-black);">Beliebt</span>
-                        <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--cream);">Dragon Roll</h3>
-                        <p class="creative-price"
-                            style="margin-bottom: 1rem; font-size: 1.8rem; color: var(--gold); font-weight: bold;">
-                            €21.00</p>
-                        <p class="creative-desc" style="margin-bottom: 1.5rem;">Aal, Gurke und Surimi, belegt mit in
-                            feine Scheiben geschnittener Avocado und Unagi-Sauce.</p>
-                        <a href="ordering.html" class="btn-order-glow">In den Warenkorb</a>
-                    </div>
+            <h2>Unsere beliebtesten Sushi</h2>
+            <div class="sushi-grid">
+                <div class="sushi-card">
+                    <img src="assets/images/sushi_nigiri_1772541891904.png" alt="Salmon Nigiri">
+                    <h3>Salmon Nigiri</h3>
                 </div>
-
-                <!-- Signature 2 (Sashimi) -->
-                <div class="creative-card">
-                    <div class="creative-img-wrapper"
-                        style="height: 380px; margin-bottom: 1.5rem; border-radius: 12px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.5);">
-                        <img src="assets/images/sushi_sashimi_1772541924274.png" alt="Sashimi Moriawase"
-                            style="height: 100%; width: 100%; object-fit: cover; transition: transform 0.5s ease;">
-                    </div>
-                    <div class="creative-info text-center" style="padding: 1.5rem 0;">
-                        <span class="badge"
-                            style="position:static; display:inline-block; margin-bottom: 1rem; background: transparent; border: 1px solid var(--cream);">Premium</span>
-                        <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--cream);">Sashimi Moriawase
-                        </h3>
-                        <p class="creative-price"
-                            style="margin-bottom: 1rem; font-size: 1.8rem; color: var(--gold); font-weight: bold;">
-                            €35.00</p>
-                        <p class="creative-desc" style="margin-bottom: 1.5rem;">Die feine Auswahl des Küchenchefs mit 15
-                            Stücken des frischesten rohen Fisches des Tages.</p>
-                        <a href="ordering.html" class="btn-order-glow">In den Warenkorb</a>
-                    </div>
+                <div class="sushi-card">
+                    <img src="assets/images/sushi_dragon_roll_closeup_1772543114074.png" alt="Dragon Roll">
+                    <h3>Dragon Roll</h3>
                 </div>
-            </div>
-
-            <div class="text-center" style="margin-top: 5rem;">
-                <a href="menu.html" class="btn btn-outline" style="font-size: 1.2rem; padding: 1rem 3rem;">Gesamte
-                    Speisekarte ansehen</a>
+                <div class="sushi-card">
+                    <img src="assets/images/sushi_maki_1772541910733.png" alt="Tuna Maki">
+                    <h3>Tuna Maki</h3>
+                </div>
+                <div class="sushi-card">
+                    <img src="assets/images/sushi_combo_platter_1772543923289.png" alt="Avocado Roll">
+                    <h3>Avocado Roll</h3>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Customer Reviews -->
+
+    <!-- TRADITION SECTION -->
+    <section class="tradition">
+        <h2>Exzellenz & Tradition</h2>
+        <p class="tradition-sub">
+            Tauchen Sie ein in eine Welt voller Geschmack und Eleganz.
+        </p>
+
+        <div class="tradition-grid">
+            <div class="tradition-card">
+                <img src="assets/images/sushi_dragon_roll_closeup_1772543114074.png" alt="Sushi Spezialitäten">
+                <h3>Sushi Spezialitäten</h3>
+                <p>Genießen Sie frisches Sushi mit hochwertigen Zutaten, die täglich geliefert werden.</p>
+            </div>
+
+            <div class="tradition-card">
+                <img src="assets/images/chef_portrait_1772541942251.png" alt="Authentische Küche">
+                <h3>Authentische Küche</h3>
+                <p>Unsere Köche bereiten jedes Gericht mit Leidenschaft und jahrelanger Erfahrung zu.</p>
+            </div>
+
+            <div class="tradition-card">
+                <img src="assets/images/restaurant_interior_1772541957072.png" alt="Reservierung">
+                <h3>Reservierung</h3>
+                <p>Reservieren Sie Ihren Tisch online oder telefonisch für einen besonderen Abend.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
     <section class="reviews">
-        <div class="container">
-            <div class="section-header">
-                <h2>Gästeerfahrungen</h2>
-            </div>
-            <div class="review-container">
-                <div class="review-card">
-                    <p class="review-text">"Das Ambiente ist faszinierend, komplett dunkel und elegant mit diesen
-                        markanten bordeauxroten Elementen. Das Sushi ist einfach das Beste der Stadt. Ein absolutes
-                        Muss."</p>
-                    <p class="review-author">— Julian K.</p>
-                </div>
-                <div class="review-card">
-                    <p class="review-text">"Authentische Aromen, die mich direkt zurück nach Tokio versetzt haben. Die
-                        Sashimi-Qualität ist kompromisslos. Jedes Mal eine wunderschöne Präsentation."</p>
-                    <p class="review-author">— Sarah M.</p>
-                </div>
-                <div class="review-card">
-                    <p class="review-text">"Die Online-Bestellung ist ein Kinderspiel und die Take-away-Verpackung fühlt
-                        sich unglaublich hochwertig an. Sakura ist durchweg phänomenal."</p>
-                    <p class="review-author">— Thomas B.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Removed Featured Product Block -->
+        <h2>Gästeerfahrungen</h2>
+        <p class="reviews-sub">Was unsere Gäste über Sakura sagen</p>
+
+        <div class="reviews-grid">
+
+            <div class="review-card">
+                <p class="review-text">
+                    "Das beste Sushi, das ich je gegessen habe. Die Atmosphäre ist ruhig und elegant."
+                </p>
+                <h4>Anna Müller</h4>
+                <span>★★★★★</span>
+            </div>
+
+            <div class="review-card">
+                <p class="review-text">
+                    "Frische Zutaten und wunderschöne Präsentation. Absolut empfehlenswert!"
+                </p>
+                <h4>David Schneider</h4>
+                <span>★★★★★</span>
+            </div>
+
+            <div class="review-card">
+                <p class="review-text">
+                    "Sehr freundlicher Service und authentische japanische Küche."
+                </p>
+                <h4>Lisa Wagner</h4>
+                <span>★★★★★</span>
+            </div>
+
+        </div>
+
+    </section>
 
     <!-- Final CTA -->
     <section class="final-cta">
         <div class="container">
             <h2>Bereit zum Genießen?</h2>
-            <p>Bestellen Sie online zur Abholung oder Lieferung, oder reservieren Sie einen Tisch für einen
-                unvergesslichen Abend.</p>
+            <p>Besuchen Sie uns oder bestellen Sie bequem nach Hause.</p>
             <div class="hero-buttons" style="justify-content: center;">
                 <a href="ordering.html" class="btn btn-primary">Online Bestellen</a>
                 <a href="contact.html" class="btn btn-outline">Kontakt aufnehmen</a>
@@ -335,21 +149,17 @@
         </div>
     </section>
 
-    <!-- Sticky Mobile Order Button -->
-    <a href="ordering.html" class="mobile-sticky-order">Bestellen</a>
-
-    <!-- Complete Footer -->
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
                     <h4>Sakura.</h4>
                     <p>Handgemachtes Sushi. Inspiriert von Japan.</p>
-                    <p>Erleben Sie pure Eleganz und authentische kulinarische Kunst.</p>
                     <div style="margin-top: 1rem; display: flex; gap: 1rem;">
-                        <a href="#" style="color: var(--gold); font-size: 1.2rem;">IG</a>
-                        <a href="#" style="color: var(--gold); font-size: 1.2rem;">FB</a>
-                        <a href="#" style="color: var(--gold); font-size: 1.2rem;">TW</a>
+                        <a href="#" class="text-gold"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gold"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gold"><i class="fab fa-twitter"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -358,19 +168,19 @@
                         <li><a href="index.html">Startseite</a></li>
                         <li><a href="menu.html">Speisekarte</a></li>
                         <li><a href="about.html">Über uns</a></li>
-                        <li><a href="ordering.html">Online Bestellen</a></li>
+                        <li><a href="ordering.html">Bestellen</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Kontakt</h4>
-                    <p>Robert-Bosch-Breite 10,<br>37079 Göttingen, Deutschland</p>
+                    <p>Robert-Bosch-Breite 10,<br>37079 Göttingen</p>
                     <p>+49 155 66284478</p>
-                    <p><a href="mailto:info@webtech-agentur.de">service@sakura-sushi-goettingen.de</a></p>
+                    <p><a href="mailto:service@sakura-sushi-goettingen.de">service@sakura-sushi-goettingen.de</a></p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 Sakura Sushi. Alle Rechte vorbehalten. | <a href="contact.html">Impressum</a> | <a
-                        href="contact.html">Datenschutz</a> | <a href="contact.html">AGB</a></p>
+                <p>&copy; 2026 Sakura Sushi. | <a href="contact.html">Impressum</a> | <a
+                        href="contact.html">Datenschutz</a></p>
             </div>
         </div>
     </footer>
