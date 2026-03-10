@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Bestellung | Sakura Sushi</title>
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -87,30 +88,29 @@
             font-size: 12px;
         }
 
-        /* CREATIVE WARENKORB */
-        .warenkorb {
-            background: linear-gradient(145deg, #111, #0d0d0d);
-            padding: 35px;
-            border-radius: 20px;
-            border: 1px solid #2a2a2a;
-            max-width: 500px;
-            margin: 60px auto 0;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(230, 57, 70, 0.05);
-            position: relative;
-            overflow: hidden;
+        /* USER REQUESTED CART STYLES - RED GLOW VERSION */
+        .order-cart {
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            width: 300px;
+            background: black;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid red;
+            box-shadow: 0 0 15px red;
+            z-index: 1000;
         }
 
-        .warenkorb::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #e63946, #ff6b6b, #e63946);
-            background-size: 200%;
-            animation: shimmer 3s infinite linear;
+        .order-cart h2 {
+            margin-top: 0;
+            font-size: 1.25rem;
+            border-bottom: 1px solid red;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
         }
+
 
         @keyframes shimmer {
             0% {
@@ -126,9 +126,7 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #1f1f1f;
+            margin-bottom: 20px;
         }
 
         .cart-icon-wrap {
@@ -169,11 +167,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 12px;
-            margin-bottom: 6px;
-            background: #1a1a1a;
-            border-radius: 10px;
-            color: #ddd;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+            color: #eee;
             font-size: 14px;
             animation: slideIn 0.3s ease;
         }
@@ -229,8 +225,8 @@
             color: white;
             font-size: 17px;
             padding: 15px 0;
-            border-top: 1px solid #1f1f1f;
-            margin: 0 0 20px;
+            border-top: 1px solid red;
+            margin: 10px 0 20px;
         }
 
         .gesamt-zeile span {
@@ -568,6 +564,77 @@
             font-size: 12px;
             font-weight: bold;
         }
+
+        /* NEUES LAYOUT FÜR BESTELLSEITE */
+        .bestellung {
+            padding-top: 120px;
+            min-height: 100vh;
+            background: #000;
+        }
+
+        .bestellung-layout {
+            display: flex;
+            gap: 50px;
+            align-items: flex-start;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 5% 80px;
+        }
+
+        .menu-selection {
+            flex: 1;
+        }
+
+        .menu-selection h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-align: left;
+        }
+
+        .menu-selection .sub {
+            color: #888;
+            margin-bottom: 3rem;
+            text-align: left;
+            font-size: 1.1rem;
+        }
+
+        .cart-sidebar {
+            display: none;
+            /* No longer needed with fixed cart */
+        }
+
+        @media (max-width: 1200px) {
+            .bestellung-layout {
+                gap: 30px;
+            }
+
+            .cart-sidebar {
+                width: 350px;
+            }
+        }
+
+        @media (max-width: 1100px) {
+            .bestellung-layout {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .cart-sidebar {
+                width: 100%;
+                position: static;
+                margin-top: 40px;
+            }
+
+            .warenkorb {
+                max-width: 100%;
+            }
+
+            .menu-selection h1,
+            .menu-selection .sub {
+                text-align: center;
+            }
+        }
     </style>
 </head>
 
@@ -700,253 +767,254 @@
 
     <section class="bestellung">
 
-        <h1>Online Bestellung</h1>
-        <p class="sub">Bestellen Sie Ihr Lieblingssushi direkt online</p>
+        <div class="bestellung-layout">
+            <div class="menu-selection">
+                <h1>Online Bestellung</h1>
+                <p class="sub">Bestellen Sie Ihr Lieblingssushi direkt online</p>
 
-        <!-- NIGIRI -->
-        <h2 class="menu-category">Nigiri</h2>
-        <div class="menu-grid">
-            <div class="item">
-                <img src="assets/images/sushi_nigiri_1772541891904.png" alt="Salmon Nigiri">
-                <h3>Salmon Nigiri</h3>
-                <p>Frischer Lachs auf Sushi-Reis.</p>
-                <span class="preis">6 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="nigiri1">
-                    <button onclick="addItem('Salmon Nigiri', 6, 'nigiri1')">Hinzufügen</button>
+                <!-- NIGIRI -->
+                <h2 class="menu-category">Nigiri</h2>
+                <div class="menu-grid">
+                    <div class="item">
+                        <img src="assets/images/sushi_nigiri_1772541891904.png" alt="Salmon Nigiri">
+                        <h3>Salmon Nigiri</h3>
+                        <p>Frischer Lachs auf Sushi-Reis.</p>
+                        <span class="preis">6 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="nigiri1">
+                            <button onclick="addItem('Salmon Nigiri', 6, 'nigiri1')">Hinzufügen</button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="assets/images/nigiri_angle1_1772545650813.png" alt="Tuna Nigiri">
+                        <h3>Tuna Nigiri</h3>
+                        <p>Thunfisch auf traditionellem Sushi-Reis.</p>
+                        <span class="preis">7 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="nigiri2">
+                            <button onclick="addItem('Tuna Nigiri', 7, 'nigiri2')">Hinzufügen</button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="assets/images/nigiri_angle2_1772545667454.png" alt="Eel Nigiri">
+                        <h3>Eel Nigiri</h3>
+                        <p>Gegrillter Aal mit Teriyaki Sauce.</p>
+                        <span class="preis">9 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="nigiri3">
+                            <button onclick="addItem('Eel Nigiri', 9, 'nigiri3')">Hinzufügen</button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="assets/images/sushi_closeup_plating_1772543075112.png" alt="Shrimp Nigiri">
+                        <h3>Shrimp Nigiri</h3>
+                        <p>Gekochte Garnele auf Sushi-Reis.</p>
+                        <span class="preis">7 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="nigiri4">
+                            <button onclick="addItem('Shrimp Nigiri', 7, 'nigiri4')">Hinzufügen</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="item">
-                <img src="assets/images/nigiri_angle1_1772545650813.png" alt="Tuna Nigiri">
-                <h3>Tuna Nigiri</h3>
-                <p>Thunfisch auf traditionellem Sushi-Reis.</p>
-                <span class="preis">7 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="nigiri2">
-                    <button onclick="addItem('Tuna Nigiri', 7, 'nigiri2')">Hinzufügen</button>
-                </div>
-            </div>
-            <div class="item">
-                <img src="assets/images/nigiri_angle2_1772545667454.png" alt="Eel Nigiri">
-                <h3>Eel Nigiri</h3>
-                <p>Gegrillter Aal mit Teriyaki Sauce.</p>
-                <span class="preis">9 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="nigiri3">
-                    <button onclick="addItem('Eel Nigiri', 9, 'nigiri3')">Hinzufügen</button>
-                </div>
-            </div>
-            <div class="item">
-                <img src="assets/images/sushi_closeup_plating_1772543075112.png" alt="Shrimp Nigiri">
-                <h3>Shrimp Nigiri</h3>
-                <p>Gekochte Garnele auf Sushi-Reis.</p>
-                <span class="preis">7 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="nigiri4">
-                    <button onclick="addItem('Shrimp Nigiri', 7, 'nigiri4')">Hinzufügen</button>
-                </div>
-            </div>
-        </div>
 
-        <!-- MAKI -->
-        <h2 class="menu-category">Maki</h2>
-        <div class="menu-grid">
-            <div class="item">
-                <img src="assets/images/sushi_maki_1772541910733.png" alt="Tuna Maki">
-                <h3>Tuna Maki</h3>
-                <p>Thunfisch eingerollt in Nori.</p>
-                <span class="preis">5 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="maki1">
-                    <button onclick="addItem('Tuna Maki', 5, 'maki1')">Hinzufügen</button>
+                <!-- MAKI -->
+                <h2 class="menu-category">Maki</h2>
+                <div class="menu-grid">
+                    <div class="item">
+                        <img src="assets/images/sushi_maki_1772541910733.png" alt="Tuna Maki">
+                        <h3>Tuna Maki</h3>
+                        <p>Thunfisch eingerollt in Nori.</p>
+                        <span class="preis">5 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="maki1">
+                            <button onclick="addItem('Tuna Maki', 5, 'maki1')">Hinzufügen</button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="assets/images/sushi_sashimi_1772541924274.png" alt="Salmon Maki">
+                        <h3>Salmon Maki</h3>
+                        <p>Lachs und Sushi-Reis.</p>
+                        <span class="preis">5 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="maki2">
+                            <button onclick="addItem('Salmon Maki', 5, 'maki2')">Hinzufügen</button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="assets/images/fresh_ingredients_1772543099300.png" alt="Gurken Maki">
+                        <h3>Gurken Maki</h3>
+                        <p>Frische Gurke im Nori-Blatt.</p>
+                        <span class="preis">4 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="maki3">
+                            <button onclick="addItem('Gurken Maki', 4, 'maki3')">Hinzufügen</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="item">
-                <img src="assets/images/sushi_sashimi_1772541924274.png" alt="Salmon Maki">
-                <h3>Salmon Maki</h3>
-                <p>Lachs und Sushi-Reis.</p>
-                <span class="preis">5 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="maki2">
-                    <button onclick="addItem('Salmon Maki', 5, 'maki2')">Hinzufügen</button>
-                </div>
-            </div>
-            <div class="item">
-                <img src="assets/images/fresh_ingredients_1772543099300.png" alt="Gurken Maki">
-                <h3>Gurken Maki</h3>
-                <p>Frische Gurke im Nori-Blatt.</p>
-                <span class="preis">4 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="maki3">
-                    <button onclick="addItem('Gurken Maki', 4, 'maki3')">Hinzufügen</button>
-                </div>
-            </div>
-        </div>
 
-        <!-- SPEZIAL ROLLS -->
-        <h2 class="menu-category">Spezial Rolls</h2>
-        <div class="menu-grid">
-            <div class="item">
-                <img src="assets/images/sushi_dragon_roll_closeup_1772543114074.png" alt="Dragon Roll">
-                <h3>Dragon Roll</h3>
-                <p>Tempura Garnelen mit Avocado.</p>
-                <span class="preis">12 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="roll1">
-                    <button onclick="addItem('Dragon Roll', 12, 'roll1')">Hinzufügen</button>
+                <!-- SPEZIAL ROLLS -->
+                <h2 class="menu-category">Spezial Rolls</h2>
+                <div class="menu-grid">
+                    <div class="item">
+                        <img src="assets/images/sushi_dragon_roll_closeup_1772543114074.png" alt="Dragon Roll">
+                        <h3>Dragon Roll</h3>
+                        <p>Tempura Garnelen mit Avocado.</p>
+                        <span class="preis">12 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="roll1">
+                            <button onclick="addItem('Dragon Roll', 12, 'roll1')">Hinzufügen</button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="assets/images/sushi_combo_platter_1772543923289.png" alt="California Roll">
+                        <h3>California Roll</h3>
+                        <p>Krabbe, Avocado und Gurke.</p>
+                        <span class="preis">8 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="roll2">
+                            <button onclick="addItem('California Roll', 8, 'roll2')">Hinzufügen</button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="assets/images/hero_sushi_prep_1772541862193.png" alt="Spicy Tuna Roll">
+                        <h3>Spicy Tuna Roll</h3>
+                        <p>Scharfer Thunfisch mit Spezial Sauce.</p>
+                        <span class="preis">10 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="roll3">
+                            <button onclick="addItem('Spicy Tuna Roll', 10, 'roll3')">Hinzufügen</button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="assets/images/sushi_prep_hero_bg_1772613876074.png" alt="Rainbow Roll">
+                        <h3>Rainbow Roll</h3>
+                        <p>Verschiedene Fischsorten auf Sushi-Roll.</p>
+                        <span class="preis">13 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="roll4">
+                            <button onclick="addItem('Rainbow Roll', 13, 'roll4')">Hinzufügen</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="item">
-                <img src="assets/images/sushi_combo_platter_1772543923289.png" alt="California Roll">
-                <h3>California Roll</h3>
-                <p>Krabbe, Avocado und Gurke.</p>
-                <span class="preis">8 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="roll2">
-                    <button onclick="addItem('California Roll', 8, 'roll2')">Hinzufügen</button>
-                </div>
-            </div>
-            <div class="item">
-                <img src="assets/images/hero_sushi_prep_1772541862193.png" alt="Spicy Tuna Roll">
-                <h3>Spicy Tuna Roll</h3>
-                <p>Scharfer Thunfisch mit Spezial Sauce.</p>
-                <span class="preis">10 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="roll3">
-                    <button onclick="addItem('Spicy Tuna Roll', 10, 'roll3')">Hinzufügen</button>
-                </div>
-            </div>
-            <div class="item">
-                <img src="assets/images/sushi_prep_hero_bg_1772613876074.png" alt="Rainbow Roll">
-                <h3>Rainbow Roll</h3>
-                <p>Verschiedene Fischsorten auf Sushi-Roll.</p>
-                <span class="preis">13 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="roll4">
-                    <button onclick="addItem('Rainbow Roll', 13, 'roll4')">Hinzufügen</button>
-                </div>
-            </div>
-        </div>
 
-        <!-- VEGETARISCH -->
-        <h2 class="menu-category">Vegetarisch</h2>
-        <div class="menu-grid">
-            <div class="item">
-                <img src="assets/images/edamame_sea_salt_1772613889838.png" alt="Avocado Roll">
-                <h3>Avocado Roll</h3>
-                <p>Frische Avocado mit Sushi-Reis.</p>
-                <span class="preis">7 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="veg1">
-                    <button onclick="addItem('Avocado Roll', 7, 'veg1')">Hinzufügen</button>
+                <!-- VEGETARISCH -->
+                <h2 class="menu-category">Vegetarisch</h2>
+                <div class="menu-grid">
+                    <div class="item">
+                        <img src="assets/images/edamame_sea_salt_1772613889838.png" alt="Avocado Roll">
+                        <h3>Avocado Roll</h3>
+                        <p>Frische Avocado mit Sushi-Reis.</p>
+                        <span class="preis">7 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="veg1">
+                            <button onclick="addItem('Avocado Roll', 7, 'veg1')">Hinzufügen</button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="assets/images/fresh_ingredients_1772543099300.png" alt="Veggie Roll">
+                        <h3>Veggie Roll</h3>
+                        <p>Gurke, Avocado und Karotte.</p>
+                        <span class="preis">7 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="veg2">
+                            <button onclick="addItem('Veggie Roll', 7, 'veg2')">Hinzufügen</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="item">
-                <img src="assets/images/fresh_ingredients_1772543099300.png" alt="Veggie Roll">
-                <h3>Veggie Roll</h3>
-                <p>Gurke, Avocado und Karotte.</p>
-                <span class="preis">7 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="veg2">
-                    <button onclick="addItem('Veggie Roll', 7, 'veg2')">Hinzufügen</button>
-                </div>
-            </div>
-        </div>
 
-        <!-- SUSHI SETS -->
-        <h2 class="menu-category">Sushi Sets</h2>
-        <div class="menu-grid">
-            <div class="item">
-                <img src="assets/images/sushi_nigiri_1772541891904.png" alt="Sushi Set Klein">
-                <h3>Sushi Set Klein</h3>
-                <p>8 Stück gemischtes Sushi.</p>
-                <span class="preis">14 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="set1">
-                    <button onclick="addItem('Sushi Set Klein', 14, 'set1')">Hinzufügen</button>
+                <!-- SUSHI SETS -->
+                <h2 class="menu-category">Sushi Sets</h2>
+                <div class="menu-grid">
+                    <div class="item">
+                        <img src="assets/images/sushi_nigiri_1772541891904.png" alt="Sushi Set Klein">
+                        <h3>Sushi Set Klein</h3>
+                        <p>8 Stück gemischtes Sushi.</p>
+                        <span class="preis">14 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="set1">
+                            <button onclick="addItem('Sushi Set Klein', 14, 'set1')">Hinzufügen</button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="assets/images/sushi_combo_platter_1772543923289.png" alt="Sushi Set Mittel">
+                        <h3>Sushi Set Mittel</h3>
+                        <p>16 Stück gemischtes Sushi.</p>
+                        <span class="preis">24 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="set2">
+                            <button onclick="addItem('Sushi Set Mittel', 24, 'set2')">Hinzufügen</button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="assets/images/hero_sushi_video_placeholder_1772544824651.png" alt="Sushi Set Groß">
+                        <h3>Sushi Set Groß</h3>
+                        <p>24 Stück gemischtes Sushi.</p>
+                        <span class="preis">34 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="set3">
+                            <button onclick="addItem('Sushi Set Groß', 34, 'set3')">Hinzufügen</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="item">
-                <img src="assets/images/sushi_combo_platter_1772543923289.png" alt="Sushi Set Mittel">
-                <h3>Sushi Set Mittel</h3>
-                <p>16 Stück gemischtes Sushi.</p>
-                <span class="preis">24 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="set2">
-                    <button onclick="addItem('Sushi Set Mittel', 24, 'set2')">Hinzufügen</button>
-                </div>
-            </div>
-            <div class="item">
-                <img src="assets/images/hero_sushi_video_placeholder_1772544824651.png" alt="Sushi Set Groß">
-                <h3>Sushi Set Groß</h3>
-                <p>24 Stück gemischtes Sushi.</p>
-                <span class="preis">34 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="set3">
-                    <button onclick="addItem('Sushi Set Groß', 34, 'set3')">Hinzufügen</button>
-                </div>
-            </div>
-        </div>
 
-        <!-- GETRÄNKE -->
-        <h2 class="menu-category">Getränke</h2>
-        <div class="menu-grid">
-            <div class="item">
-                <img src="assets/images/japanese_green_tea_1772543876253.png" alt="Grüner Tee">
-                <h3>Grüner Tee</h3>
-                <p>Traditioneller japanischer Tee.</p>
-                <span class="preis">3 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="drink1">
-                    <button onclick="addItem('Grüner Tee', 3, 'drink1')">Hinzufügen</button>
-                </div>
-            </div>
-            <div class="item">
-                <img src="assets/images/sake_bottle_1772543894019.png" alt="Sake">
-                <h3>Sake</h3>
-                <p>Japanischer Reiswein.</p>
-                <span class="preis">6 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="drink2">
-                    <button onclick="addItem('Sake', 6, 'drink2')">Hinzufügen</button>
-                </div>
-            </div>
-            <div class="item">
-                <img src="assets/images/japanese_soft_drinks_1772613935223.png" alt="Softgetränk">
-                <h3>Softgetränk</h3>
-                <p>Erfrischendes Softgetränk.</p>
-                <span class="preis">3 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="drink3">
-                    <button onclick="addItem('Softgetränk', 3, 'drink3')">Hinzufügen</button>
-                </div>
-            </div>
-            <div class="item">
-                <img src="assets/images/sakura_cocktail_1772613920112.png" alt="Mineralwasser">
-                <h3>Mineralwasser</h3>
-                <p>Still oder Sprudel.</p>
-                <span class="preis">2.5 €</span>
-                <div class="bestell-box">
-                    <input type="number" value="1" min="1" id="drink4">
-                    <button onclick="addItem('Mineralwasser', 2.5, 'drink4')">Hinzufügen</button>
-                </div>
-            </div>
-        </div>
+                <!-- GETRÄNKE -->
+                <h2 class="menu-category">Getränke</h2>
+                <div class="menu-grid">
+                    <div class="item">
+                        <img src="assets/images/japanese_green_tea_1772543876253.png" alt="Grüner Tee">
+                        <h3>Grüner Tee</h3>
+                        <p>Traditioneller japanischer Tee.</p>
+                        <span class="preis">3 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="drink1">
+                            <button onclick="addItem('Grüner Tee', 3, 'drink1')">Hinzufügen</button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="assets/images/sake_bottle_1772543894019.png" alt="Sake">
+                        <h3>Sake</h3>
+                        <p>Japanischer Reiswein.</p>
+                        <span class="preis">6 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="drink2">
+                            <button onclick="addItem('Sake', 6, 'drink2')">Hinzufügen</button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="assets/images/japanese_soft_drinks_1772613935223.png" alt="Softgetränk">
+                        <h3>Softgetränk</h3>
+                        <p>Erfrischendes Softgetränk.</p>
+                        <span class="preis">3 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="drink3">
+                            <button onclick="addItem('Softgetränk', 3, 'drink3')">Hinzufügen</button>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="assets/images/sakura_cocktail_1772613920112.png" alt="Mineralwasser">
+                        <h3>Mineralwasser</h3>
+                        <p>Still oder Sprudel.</p>
+                        <span class="preis">2.5 €</span>
+                        <div class="bestell-box">
+                            <input type="number" value="1" min="1" id="drink4">
+                            <button onclick="addItem('Mineralwasser', 2.5, 'drink4')">Hinzufügen</button>
+                        </div>
+                    </div>
+                </div> <!-- Ende menu-selection -->
 
-        <!-- WARENKORB -->
-        <div class="warenkorb">
-            <div class="warenkorb-header">
-                <div class="cart-icon-wrap">🛒</div>
-                <h2>Ihre Bestellung</h2>
-                <span class="cart-count" id="cart-count">0</span>
-            </div>
-            <ul id="liste"></ul>
-            <div class="leer-notice" id="leer-hinweis"><i class="fas fa-shopping-basket"></i><span>Noch keine Artikel
-                    hinzugefügt.</span></div>
-            <div class="gesamt-zeile"><span>Gesamt</span><span id="gesamt">0.00 €</span></div>
-            <button class="bestellen" onclick="bestellungAbschicken()"><i class="fas fa-paper-plane"></i>&nbsp;
-                Bestellung abschicken</button>
-        </div>
+                <div class="order-cart">
+                    <div class="warenkorb-header">
+                        <h2>Ihre Bestellung</h2>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </div>
+                    <ul id="liste"></ul>
+                    <div class="leer-notice" id="leer-hinweis">
+                        <span>Noch keine Artikel hinzugefügt.</span>
+                    </div>
+                    <div class="gesamt-zeile"><span>Gesamt</span><span id="gesamt">0.00 €</span></div>
+                    <button class="bestellen" onclick="bestellungAbschicken()">Bestellung abschicken</button>
+                </div>
+            </div> <!-- Ende bestellung-layout -->
 
     </section>
 
@@ -974,7 +1042,7 @@
                 </div>
                 <div class="footer-col">
                     <h4>Kontakt</h4>
-                    <p>Robert-Bosch-Breite 10,<br>37079 Göttingen</p>
+                    <p>Musterstraße 1,<br>12345 Musterstadt</p>
                     <p>+49 155 66284478</p>
                     <p><a href="mailto:service@sakura-sushi-goettingen.de">service@sakura-sushi-goettingen.de</a></p>
                 </div>
