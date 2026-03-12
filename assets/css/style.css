@@ -185,90 +185,78 @@ ul {
   transition: var(--transition);
 }
 
-/* HERO - Frosted Glass Box Layout */
+/* HERO - User's Custom Layout */
 .hero {
   height: 100vh;
+  background-image: url("../images/sushi_sashimi_1772541924274.png");
+  background-size: cover;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
-  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('../images/sushi_sashimi_1772541924274.png');
-  background-size: cover;
-  background-position: center;
-  color: white;
-  text-align: center;
-  font-family: var(--font-hero);
+  position: relative;
 }
 
-.hero-box {
-  max-width: 650px;
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  background: rgba(255, 255, 255, 0.03);
-  padding: 60px;
-  border-radius: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.6),
+      rgba(0, 0, 0, 0.5));
+}
+
+.hero-content {
+  position: relative;
+  text-align: center;
+  color: white;
+  max-width: 700px;
+  z-index: 1;
 }
 
 .hero h1 {
-  font-size: 56px;
-  margin-bottom: 20px;
-  line-height: 1.2;
-  font-weight: 600;
-  color: white;
+  font-size: 70px;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  font-family: var(--font-hero);
 }
 
 .hero p {
-  font-size: 18px;
-  line-height: 1.6;
-  margin-bottom: 40px;
-  color: #eeeeee;
+  font-size: 22px;
+  margin-bottom: 35px;
 }
 
-/* BUTTONS */
-.buttons {
+.hero-buttons {
   display: flex;
   gap: 20px;
   justify-content: center;
 }
 
-.btn-menu {
-  padding: 14px 32px;
-  border-radius: 40px;
-  background: var(--bordeaux-red);
+.hero-buttons .btn-primary {
+  background: #e63946;
+  padding: 14px 28px;
   color: white;
-  font-weight: 600;
   text-decoration: none;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: 0.3s;
 }
 
-.btn-menu:hover {
-  background: #ff4d5a;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(230, 57, 70, 0.3);
+.hero-buttons .btn-primary:hover {
+  background: #c1121f;
+  transform: none;
 }
 
-.btn-reserve {
-  padding: 14px 32px;
-  border-radius: 40px;
+.hero-buttons .btn-secondary {
   border: 2px solid white;
+  padding: 14px 28px;
   color: white;
-  font-weight: 600;
   text-decoration: none;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  border-radius: 30px;
+  transition: 0.3s;
 }
 
-.btn-reserve:hover {
+.hero-buttons .btn-secondary:hover {
   background: white;
-  color: #111111;
-  transform: translateY(-3px);
+  color: black;
 }
 
 @media (max-width: 768px) {
@@ -910,9 +898,57 @@ footer {
   line-height: 1.5;
 }
 
+/* TIMELINE-ITEM HOVER FIX */
 .timeline-item:hover {
   transform: translateY(-10px);
   border-color: #e63946;
+}
+
+/* SUBPAGE HERO - Standardized & Modern */
+.page-hero {
+  padding: 140px 10% 80px;
+  background-color: #111;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.hero-about {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('../images/restaurant_interior_1772541957072.png') no-repeat center center/cover;
+}
+
+.hero-menu {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('../images/sushi_prep_hero_bg_1772613876074.png') no-repeat center center/cover;
+}
+
+.hero-ordering {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('../images/hero_sushi_video_placeholder_1772544824651.png') no-repeat center center/cover;
+}
+
+.page-hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 15px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-family: var(--font-hero);
+}
+
+.page-hero p {
+  font-size: 1.2rem;
+  color: #bbb;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .page-hero {
+    padding: 120px 5% 60px;
+  }
+
+  .page-hero h1 {
+    font-size: 2.5rem;
+  }
 }
 
 /* ABOUT PAGE */
@@ -1002,6 +1038,23 @@ footer {
 .timeline-item p {
   color: #bbb;
   font-size: 14px;
+}
+
+.timeline-img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(230, 57, 70, 0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  transition: 0.4s ease;
+  display: block;
+}
+
+.timeline-item:hover .timeline-img {
+  transform: scale(1.05);
+  border-color: #e63946;
 }
 
 .timeline-item:hover {
