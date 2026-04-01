@@ -617,22 +617,33 @@
         @media (max-width: 1100px) {
             .bestellung-layout {
                 flex-direction: column;
-                padding: 20px;
+                padding: 10px 15px 60px;
             }
 
-            .cart-sidebar {
-                width: 100%;
-                position: static;
+            .order-cart {
+                position: relative !important;
+                top: auto !important;
+                right: auto !important;
+                width: 100% !important;
                 margin-top: 40px;
+                display: none; /* Versteckt bis Artikel hinzugefügt werden */
+                border: 2px solid #e63946;
+                box-shadow: 0 10px 40px rgba(230, 57, 70, 0.2);
+                animation: slideUp 0.5s ease forwards;
             }
 
-            .warenkorb {
-                max-width: 100%;
+            .order-cart.visible {
+                display: block !important;
             }
 
             .menu-selection h1,
             .menu-selection .sub {
                 text-align: center;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
         }
     </style>
@@ -1005,6 +1016,13 @@
                     </div>
                 </div> <!-- Ende menu-selection -->
 
+                <!-- MOBILE CHECKOUT BUTTON -->
+                <div id="mobile-checkout-btn" style="display: none; text-align: center; margin: 30px 0;">
+                    <button class="bestellen" onclick="scrollToCart()" style="max-width: 320px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 12px; background: linear-gradient(135deg, #e63946, #b22222);">
+                        <i class="fas fa-shopping-basket"></i> Zum Warenkorb gehen
+                    </button>
+                </div>
+
                 <div class="order-cart">
                     <div class="warenkorb-header">
                         <h2>Ihre Bestellung</h2>
@@ -1077,8 +1095,29 @@
 
             total += price * qty;
             itemCount += qty;
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
             document.getElementById("gesamt").textContent = total.toFixed(2) + " €";
             document.getElementById("cart-count").textContent = itemCount;
+            
+            const cart = document.querySelector('.order-cart');
+            const mobileBtn = document.getElementById('mobile-checkout-btn');
+
+            if (itemCount > 0) {
+                cart.classList.add('visible');
+                if (window.innerWidth <= 1100) {
+                    mobileBtn.style.display = 'block';
+                }
+            } else {
+                cart.classList.remove('visible');
+                mobileBtn.style.display = 'none';
+            }
+        }
+
+        function scrollToCart() {
+            document.querySelector('.order-cart').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function removeItem(btn, amount) {
@@ -1088,10 +1127,10 @@
             setTimeout(() => {
                 li.remove();
                 total = Math.max(0, total - amount);
-                document.getElementById("gesamt").textContent = total.toFixed(2) + " €";
                 let remaining = document.querySelectorAll("#liste li").length;
                 itemCount = remaining;
-                document.getElementById("cart-count").textContent = remaining;
+                
+                updateCartDisplay();
                 if (remaining === 0) document.getElementById("leer-hinweis").style.display = "flex";
             }, 300);
         }
@@ -1149,9 +1188,8 @@
                 total = 0;
                 itemCount = 0;
                 document.getElementById('liste').innerHTML = '';
-                document.getElementById('gesamt').textContent = '0.00 \u20ac';
-                document.getElementById('cart-count').textContent = '0';
                 document.getElementById('leer-hinweis').style.display = 'flex';
+                updateCartDisplay();
             }, 300);
         }
 
