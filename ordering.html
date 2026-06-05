@@ -90,22 +90,26 @@
 
         /* USER REQUESTED CART STYLES - RED GLOW VERSION */
         .order-cart {
-            position: fixed;
-            top: 120px;
-            right: 20px;
-            width: 300px;
+            width: 100%;
+            max-width: 600px;
+            margin: 40px auto 0;
             background: black;
             color: white;
-            padding: 20px;
-            border-radius: 10px;
+            padding: 30px;
+            border-radius: 16px;
             border: 2px solid red;
-            box-shadow: 0 0 15px red;
-            z-index: 1000;
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+            display: none; /* Versteckt bis Artikel hinzugefügt werden */
+            animation: slideUp 0.5s ease forwards;
+        }
+
+        .order-cart.visible {
+            display: block;
         }
 
         .order-cart h2 {
             margin-top: 0;
-            font-size: 1.25rem;
+            font-size: 1.5rem;
             border-bottom: 1px solid red;
             padding-bottom: 10px;
             margin-bottom: 15px;
@@ -574,15 +578,16 @@
 
         .bestellung-layout {
             display: flex;
-            gap: 50px;
-            align-items: flex-start;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px 5% 80px;
         }
 
         .menu-selection {
-            flex: 1;
+            width: 100%;
         }
 
         .menu-selection h1 {
@@ -599,47 +604,13 @@
             font-size: 1.1rem;
         }
 
-        .cart-sidebar {
-            display: none;
-            /* No longer needed with fixed cart */
-        }
-
-        @media (max-width: 1200px) {
-            .bestellung-layout {
-                gap: 30px;
-            }
-
-            .cart-sidebar {
-                width: 350px;
-            }
-        }
-
         @media (max-width: 1100px) {
             .bestellung-layout {
-                flex-direction: column;
-                align-items: center;
                 padding: 10px 15px 60px;
             }
 
             .menu-selection {
-                width: 100%;
                 text-align: center;
-            }
-
-            .order-cart {
-                position: relative !important;
-                top: auto !important;
-                right: auto !important;
-                width: 100% !important;
-                margin-top: 40px;
-                display: none; /* Versteckt bis Artikel hinzugefügt werden */
-                border: 2px solid #e63946;
-                box-shadow: 0 10px 40px rgba(230, 57, 70, 0.2);
-                animation: slideUp 0.5s ease forwards;
-            }
-
-            .order-cart.visible {
-                display: block !important;
             }
 
             .menu-selection h1,
@@ -1140,9 +1111,7 @@
 
             if (itemCount > 0) {
                 cart.classList.add('visible');
-                if (window.innerWidth <= 1100) {
-                    mobileBtn.style.display = 'block';
-                }
+                mobileBtn.style.display = 'block';
             } else {
                 cart.classList.remove('visible');
                 mobileBtn.style.display = 'none';

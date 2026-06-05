@@ -602,7 +602,7 @@ ul {
 
 /* Final CTA */
 .final-cta {
-  background: linear-gradient(rgba(17, 17, 17, 0.8), rgba(17, 17, 17, 0.9)), url('../images/restaurant_interior_1772541957072.png') no-repeat center center/cover;
+  background: linear-gradient(rgba(17, 17, 17, 0.75), rgba(17, 17, 17, 0.85)), url('../images/sushi_cta_bg.png') no-repeat center center/cover;
   padding: 8rem 0;
   text-align: center;
 }
@@ -913,7 +913,7 @@ footer {
 }
 
 .hero-about {
-  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('../images/restaurant_interior_1772541957072.png') no-repeat center center/cover;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.95)), url('../images/about_hero_new.png') no-repeat center center/cover;
 }
 
 .hero-menu {
@@ -1002,8 +1002,8 @@ footer {
 /* CREATIVE ABOUT STORY */
 .about-story-creative {
   position: relative;
-  padding: 100px 0;
-  margin-bottom: 120px;
+  padding: 100px 0 40px;
+  margin-bottom: 40px;
   overflow: hidden;
 }
 
